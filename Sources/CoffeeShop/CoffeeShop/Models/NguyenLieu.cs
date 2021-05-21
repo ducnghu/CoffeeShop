@@ -9,15 +9,25 @@
 
 namespace CoffeeShop.Models
 {
+    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class NguyenLieu
+    public partial class NguyenLieu : BaseViewModel
     {
-        public int MaSP { get; set; }
-        public int MaNL { get; set; }
-        public int SoLuong { get; set; }
-    
+        #region private variables
+        private int _maSP;
+        private int _maNL;
+        private int _soLuong;
+
+        #endregion
+
+        #region properties
+        public int MaSP { get => _maSP; set { _maSP = value; OnPropertyChanged(); } }
+        public int MaNL { get => _maNL; set { _maNL = value; OnPropertyChanged(); } }
+        public int SoLuong { get => _soLuong; set { _soLuong = value; OnPropertyChanged(); } }
+
+        #endregion
         public virtual KhoNguyenLieu KhoNguyenLieu { get; set; }
         public virtual SanPham SanPham { get; set; }
     }

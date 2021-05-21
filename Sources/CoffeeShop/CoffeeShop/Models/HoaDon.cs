@@ -9,17 +9,30 @@
 
 namespace CoffeeShop.Models
 {
+    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class HoaDon
+    public partial class HoaDon : BaseViewModel
     {
-        public int Ma { get; set; }
-        public System.DateTime NgayTao { get; set; }
-        public Nullable<int> MaKH { get; set; }
-        public Nullable<int> DiemTichLuy { get; set; }
-        public int TongTien { get; set; }
-    
+        #region private variables
+        private int _ma;
+        private System.DateTime _ngayTao;
+        private Nullable<int> _maKH;
+        private Nullable<int> _diemTichLuy;
+        private int _tongTien;
+
+        #endregion
+
+        #region properties
+        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
+        public System.DateTime NgayTao { get => _ngayTao; set { _ngayTao = value; OnPropertyChanged(); } }
+        public Nullable<int> MaKH { get => _maKH; set { _maKH = value; OnPropertyChanged(); } }
+        public Nullable<int> DiemTichLuy { get => _diemTichLuy; set { _diemTichLuy = value; OnPropertyChanged(); } }
+        public int TongTien { get => _tongTien; set { _tongTien = value; OnPropertyChanged(); } }
+
+        #endregion
+
         public virtual ChiTietHoaDon ChiTietHoaDon { get; set; }
         public virtual KhachHang KhachHang { get; set; }
     }
