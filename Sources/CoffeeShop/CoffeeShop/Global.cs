@@ -62,43 +62,16 @@ namespace CoffeeShop
 
         #region Panel
         private String _homeColor;
-
-        private String _statColor;
-
-        private String _statTextColor;
-
-        private String _settingColor;
-
-        private String _settingTextColor;
-
-        private String _invoiceListColor;
-        private String _invoiceListTextColor;
-
-        private String _checkOutColor = Brushes.White.ToString();
-
         private String _homeTextColor;
 
-        private String _cakesColor;
-        private String _cakesTextColor;
-
-        private String _checkOutTextColor = Brushes.White.ToString();
-        public String StatisticColor { get => _statColor; set { _statColor = value; OnPropertyChanged("StatisticColor"); } }
-        public String StatisticTextColor { get => _statTextColor; set { _statTextColor = value; OnPropertyChanged("StatisticTextColor"); } }
-
-        public String SettingTextColor { get => _settingTextColor; set { _settingTextColor = value; OnPropertyChanged("SettingTextColor"); } }
-        public String SettingColor { get => _settingColor; set { _settingColor = value; OnPropertyChanged("SettingColor"); } }
-
-        public String HomeTextColor { get => _homeTextColor; set { _homeTextColor = value; OnPropertyChanged("HomeTextColor"); } }
-        public String CheckOutTextColor { get => _checkOutTextColor; set { _checkOutTextColor = value; OnPropertyChanged("CheckOutTextColor"); } }
+        private String _warehouseColor;
+        private String _warehouseTextColor;
 
         public String HomeColor { get => _homeColor; set { _homeColor = value; OnPropertyChanged("HomeColor"); } }
-        public String CheckOutColor { get => _checkOutColor; set { _checkOutColor = value; OnPropertyChanged("CheckOutColor"); } }
+        public String HomeTextColor { get => _homeTextColor; set { _homeTextColor = value; OnPropertyChanged("HomeTextColor"); } }
 
-        public String CakesColor { get => _cakesColor; set { _cakesColor = value; OnPropertyChanged("CakesColor"); } }
-        public String CakesTextColor { get => _cakesTextColor; set { _cakesTextColor = value; OnPropertyChanged("CakesTextColor"); } }
-
-        public String InvoiceListColor { get => _invoiceListColor; set { _invoiceListColor = value; OnPropertyChanged("InvoiceListColor"); } }
-        public String InvoiceListTextColor { get => _invoiceListTextColor; set { _invoiceListTextColor = value; OnPropertyChanged("InvoiceListTextColor"); } }
+        public String WarehouseColor { get => _warehouseColor; set { _warehouseColor = value; OnPropertyChanged("WarehouseColor"); } }
+        public String WarehouseTextColor { get => _warehouseTextColor; set { _warehouseTextColor = value; OnPropertyChanged("WarehouseTextColor"); } }
 
         public BaseViewModel CurrentPageViewModel { get => _currentPageViewModel; set { _currentPageViewModel = value; OnPropertyChanged("CurrentPageViewModel"); } }
 

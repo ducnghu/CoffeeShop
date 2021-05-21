@@ -18,13 +18,17 @@
             WindowStartupLocation="CenterScreen"
         
             DataContext="{StaticResource MVM}"
-        Title="CoffeeShop" Height="850" Width="1200">
+        Title="CoffeeShop" Height="850" Width="1520">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
             <views:HomeView DataContext="{Binding}"/>
             <!-- This is a UserControl -->
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewmodels:WarehouseViewModel}">
+            <views:WarehouseView DataContext="{Binding}"/>
+            <!-- This is a UserControl -->
+        </DataTemplate>
 
         <ObjectDataProvider x:Key="Global"
                       ObjectType="{x:Type local:Global}"
@@ -33,10 +37,10 @@
     
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
-            <StackPanel Height="auto" Width="110" Margin="5" Orientation="Vertical">
+            <StackPanel Height="auto" Width="130" Margin="5" Orientation="Vertical">
                 <!--Home button-->
-                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="90" Height="90" Command="{Binding HomeCommand}">
-                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=HomeColor}" Width="90" Height="90">
+                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding HomeCommand}">
+                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=HomeColor}" Width="110" Height="90">
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="CartOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=HomeTextColor}"/>
                             <TextBlock Text="Home" Foreground="{Binding Source={StaticResource Global},Path=HomeTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
@@ -44,6 +48,15 @@
                     </Border>
                 </Button>
 
+                <!--Warehouse button-->
+                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding WarehouseCommand}">
+                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=WarehouseColor}" Width="110" Height="90">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Warehouse" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=WarehouseTextColor}"/>
+                            <TextBlock Text="Warehouse" Foreground="{Binding Source={StaticResource Global},Path=WarehouseTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </Button>
             </StackPanel>
             <ContentControl Grid.Column="1" DockPanel.Dock="Right" Margin="10 0" Content="{Binding Source={StaticResource Global},Path=CurrentPageViewModel}">
 

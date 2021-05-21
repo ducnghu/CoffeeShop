@@ -23,6 +23,7 @@ namespace CoffeeShop.ViewModels
         #region Commands
 
         public ICommand HomeCommand { get; set; }
+        public ICommand WarehouseCommand { get; set; }
         #endregion
 
         #region Panel
@@ -53,7 +54,6 @@ namespace CoffeeShop.ViewModels
             global.HomeColor = Brushes.SaddleBrown.ToString();
             global.HomeTextColor = Brushes.White.ToString();
 
-
             VersionTextBlock = GetPublishedVersion();
             if (VersionTextBlock == null || VersionTextBlock == "")
                 VersionTextBlock = "not installed";
@@ -68,6 +68,15 @@ namespace CoffeeShop.ViewModels
 
             });
 
+            WarehouseCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
+            {
+                ResetPanelColor();
+                global.WarehouseColor = Brushes.SaddleBrown.ToString();
+                global.WarehouseTextColor = Brushes.White.ToString();
+                global.CurrentPageViewModel = WarehouseViewModel.GetInstance();
+
+
+            });
         }
 
         void ResetPanelColor()
@@ -75,6 +84,8 @@ namespace CoffeeShop.ViewModels
             global.HomeColor = Brushes.White.ToString();
             global.HomeTextColor = Brushes.Gray.ToString();
 
+            global.WarehouseColor = Brushes.White.ToString();
+            global.WarehouseTextColor = Brushes.Gray.ToString();
         }
     }
 }

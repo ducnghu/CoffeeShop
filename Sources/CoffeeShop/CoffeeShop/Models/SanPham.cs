@@ -25,7 +25,7 @@ namespace CoffeeShop.Models
         private string _ten ;
         private int _maLoai ;
         private int _gia ;
-        private string _anh ;
+        private byte[] _anh ;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace CoffeeShop.Models
         public string Ten { get => _ten; set { _ten = value; OnPropertyChanged(); } }
         public int MaLoai { get => _maLoai; set { _maLoai = value; OnPropertyChanged(); } }
         public int Gia { get => _gia; set { _gia = value; OnPropertyChanged(); } }
-        public string Anh { get => _anh; set { _anh = value; OnPropertyChanged(); } }
+        public byte[] Anh { get => _anh; set { _anh = value; OnPropertyChanged(); } }
 
         #endregion
 
