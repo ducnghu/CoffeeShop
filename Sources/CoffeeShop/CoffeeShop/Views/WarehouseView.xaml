@@ -20,28 +20,6 @@
 
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1400">
-    <!--<UserControl.Resources>
-        
-        <ResourceDictionary x:Key="Dialogbox">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        <Style x:Key="HolderButton" TargetType="Border">
-            <Setter Property="Width" Value="auto"></Setter>
-            <Setter Property="Height" Value="auto"></Setter>
-            <Setter Property="CornerRadius" Value="50"></Setter>
-            <Setter Property="Background" Value="WhiteSmoke"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="SaddleBrown"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-    </UserControl.Resources>-->
-
     <Grid>
 
         <!--Thêm nguyên liệu-->
@@ -237,8 +215,12 @@
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
-        <StackPanel>
-            <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="770"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
                 <TextBlock DockPanel.Dock="Left" FontSize="40" FontWeight="DemiBold" Margin="10" Width="300">
                     Kho nguyên liệu
                 </TextBlock>
@@ -250,7 +232,7 @@
                 </Button>
             </DockPanel>
             <!--Nguyên liệu ListView-->
-            <ListView x:Name="RawMaterialsListView"
+            <ListView x:Name="RawMaterialsListView" Grid.Row="1"
             ItemsSource="{Binding RawMaterials}" SelectedItem="{Binding SelectedRawMaterial}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
                 <ListView.View>
                     <GridView>
@@ -303,6 +285,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

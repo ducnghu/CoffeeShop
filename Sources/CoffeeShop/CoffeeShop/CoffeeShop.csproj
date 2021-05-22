@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Global.cs" />
+    <Compile Include="Models\BytesToBitMapConverter.cs" />
     <Compile Include="Models\ChiTietHoaDon.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -125,15 +126,19 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BasicViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\WarehouseViewModel.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingView.xaml.cs">
+      <DependentUpon>SettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WarehouseView.xaml.cs">
       <DependentUpon>WarehouseView.xaml</DependentUpon>
@@ -163,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

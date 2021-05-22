@@ -3,7 +3,8 @@
                     xmlns:viewmodel="clr-namespace:CoffeeShop.ViewModels">
     <viewmodel:MainViewModel x:Key="MVM"/>
     <viewmodel:HomeViewModel x:Key="HVM"/>
-    <viewmodel:ProductViewModel x:Key="PVM"/>
     <viewmodel:WarehouseViewModel x:Key="WVM"/>
-    
+    <viewmodel:ProductViewModel x:Key="PVM"/>
+    <viewmodel:SettingViewModel x:Key="SVM"/>
+
 </ResourceDictionary>

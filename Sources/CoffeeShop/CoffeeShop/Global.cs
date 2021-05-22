@@ -67,11 +67,23 @@ namespace CoffeeShop
         private String _warehouseColor;
         private String _warehouseTextColor;
 
+        private String _productColor;
+        private String _productTextColor;
+
+        private String _settingColor;
+        private String _settingTextColor;
+
         public String HomeColor { get => _homeColor; set { _homeColor = value; OnPropertyChanged("HomeColor"); } }
         public String HomeTextColor { get => _homeTextColor; set { _homeTextColor = value; OnPropertyChanged("HomeTextColor"); } }
 
         public String WarehouseColor { get => _warehouseColor; set { _warehouseColor = value; OnPropertyChanged("WarehouseColor"); } }
         public String WarehouseTextColor { get => _warehouseTextColor; set { _warehouseTextColor = value; OnPropertyChanged("WarehouseTextColor"); } }
+
+        public String ProductColor { get => _productColor; set { _productColor = value; OnPropertyChanged("ProductColor"); } }
+        public String ProductTextColor { get => _productTextColor; set { _productTextColor = value; OnPropertyChanged("ProductTextColor"); } }
+
+        public String SettingColor { get => _settingColor; set { _settingColor = value; OnPropertyChanged("SettingColor"); } }
+        public String SettingTextColor { get => _settingTextColor; set { _settingTextColor = value; OnPropertyChanged("SettingTextColor"); } }
 
         public BaseViewModel CurrentPageViewModel { get => _currentPageViewModel; set { _currentPageViewModel = value; OnPropertyChanged("CurrentPageViewModel"); } }
 

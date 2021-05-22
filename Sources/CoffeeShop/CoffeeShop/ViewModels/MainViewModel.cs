@@ -24,6 +24,8 @@ namespace CoffeeShop.ViewModels
 
         public ICommand HomeCommand { get; set; }
         public ICommand WarehouseCommand { get; set; }
+        public ICommand ProductCommand { get; set; }
+        public ICommand SettingCommand { get; set; }
         #endregion
 
         #region Panel
@@ -65,7 +67,6 @@ namespace CoffeeShop.ViewModels
                 global.HomeTextColor = Brushes.White.ToString();
                 global.CurrentPageViewModel = HomeViewModel.GetInstance();
 
-
             });
 
             WarehouseCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
@@ -75,6 +76,23 @@ namespace CoffeeShop.ViewModels
                 global.WarehouseTextColor = Brushes.White.ToString();
                 global.CurrentPageViewModel = WarehouseViewModel.GetInstance();
 
+            });
+
+            ProductCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
+            {
+                ResetPanelColor();
+                global.ProductColor = Brushes.SaddleBrown.ToString();
+                global.ProductTextColor = Brushes.White.ToString();
+                global.CurrentPageViewModel = ProductViewModel.GetInstance();
+
+            });
+
+            SettingCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
+            {
+                ResetPanelColor();
+                global.SettingColor = Brushes.SaddleBrown.ToString();
+                global.SettingTextColor = Brushes.White.ToString();
+                global.CurrentPageViewModel = SettingViewModel.GetInstance();
 
             });
         }
@@ -86,6 +104,12 @@ namespace CoffeeShop.ViewModels
 
             global.WarehouseColor = Brushes.White.ToString();
             global.WarehouseTextColor = Brushes.Gray.ToString();
+
+            global.ProductColor = Brushes.White.ToString();
+            global.ProductTextColor = Brushes.Gray.ToString();
+
+            global.SettingColor = Brushes.White.ToString();
+            global.SettingTextColor = Brushes.Gray.ToString();
         }
     }
 }
