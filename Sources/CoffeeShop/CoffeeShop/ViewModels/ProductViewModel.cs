@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace CoffeeShop.ViewModels
 {
-    public class ProductViewModel:BaseViewModel
+    public class ProductViewModel : BaseViewModel
     {
         #region variables
         private static ProductViewModel _instance = null;
@@ -51,6 +51,18 @@ namespace CoffeeShop.ViewModels
         private dynamic _selectedEditProductRawMaterial;
         private AsyncObservableCollection<dynamic> _editProductRawMaterials;
 
+        // Delete product
+        private bool _isOpenDeleteProductDialog;
+
+        // Show product
+        private bool _isOpenShowProductDialog;
+        private string _showProductName;
+        private int _showProductPrice;
+        private byte[] _showProductThumbnail;
+        private string _showProductCategory;
+        private dynamic _selectedShowProductRawMaterial;
+        private AsyncObservableCollection<dynamic> _showProductRawMaterials;
+
         #endregion
 
         #region properties
@@ -72,7 +84,12 @@ namespace CoffeeShop.ViewModels
                 }
                 OnPropertyChanged(); } }
         public AsyncObservableCollection<dynamic> Products { get => _products; set { _products = value; OnPropertyChanged(); } }
-        public dynamic SelectedProduct { get => _selectedProduct; set { _selectedProduct = value; OnPropertyChanged(); } }
+        public dynamic SelectedProduct { get => _selectedProduct; set { _selectedProduct = value;
+                if (value != null && IsOpenEditProductDialog == false && IsOpenDeleteProductDialog == false)
+                {
+                    IsOpenShowProductDialog = true;
+                }
+                OnPropertyChanged(); } }
 
         // Add product
         public bool IsOpenAddProductDialog
@@ -125,58 +142,7 @@ namespace CoffeeShop.ViewModels
         public AsyncObservableCollection<dynamic> NewProductRawMaterials { get => _newProductRawMaterials; set { _newProductRawMaterials = value; OnPropertyChanged(); } }
 
         // Edit product
-        public bool IsOpenEditProductDialog
-        {
-            get => _isOpenAddProductDialog; set
-            {
-                _isOpenAddProductDialog = value;
-                if (value == true)
-                {
-                    int maSP = SelectedProduct.Ma;
-                    SanPham sanpham = DataProvider.Ins.DB.SanPham.First(x => x.Ma == maSP);
-                    EditProductName = sanpham.Ten;
-                    EditProductPrice = sanpham.Gia;
-                    SelectedEditProductCategory = new { Ma = sanpham.LoaiSanPham.Ma, Ten = sanpham.LoaiSanPham.Ten };
-                    EditProductCategories = new AsyncObservableCollection<dynamic>();
-                    foreach (var item in DataProvider.Ins.DB.LoaiSanPham)
-                    {
-                        EditProductCategories.Add(new
-                        {
-                            Ma = item.Ma,
-                            Ten = item.Ten
-                        });
-                    }
-                    EditProductThumbnail = sanpham.Anh;
-                    SelectedEditProductRawMaterial = null;
-                    EditProductRawMaterials = new AsyncObservableCollection<dynamic>();
-                    foreach (var item in sanpham.NguyenLieu)
-                    {
-                        EditProductRawMaterials.Add(new
-                        {
-                            MaNL = item.MaNL,
-                            Ten = item.KhoNguyenLieu.Ten,
-                            DonVi = item.KhoNguyenLieu.DonVi,
-                            SoLuong = item.SoLuong,
-                        });
-                    }
-                    SelectedAddEditProductRawMaterial = null;
-                    AddEditProductRawMaterials = new AsyncObservableCollection<dynamic>();
-                    foreach (var item in DataProvider.Ins.DB.KhoNguyenLieu)
-                    {
-                        if (EditProductRawMaterials.Where(x=>x.MaNL == item.MaNL).Count() == 0)
-                        {
-                            AddEditProductRawMaterials.Add(new
-                            {
-                                MaNL = item.MaNL,
-                                Ten = item.Ten,
-                                DonVi = item.DonVi,
-                            });
-                        }
-                    }
-                }
-                OnPropertyChanged();
-            }
-        }
+        public bool IsOpenEditProductDialog { get => _isOpenEditProductDialog; set { _isOpenEditProductDialog = value; OnPropertyChanged(); } }
         public string EditProductName { get => _editProductName; set { value = value.ToUpper(); _editProductName = value; OnPropertyChanged(); } }
         public int EditProductPrice { get => _editProductPrice; set { _editProductPrice = value; OnPropertyChanged(); } }
         public byte[] EditProductThumbnail { get => _editProductThumbnail; set { _editProductThumbnail = value; OnPropertyChanged(); } }
@@ -189,6 +155,34 @@ namespace CoffeeShop.ViewModels
         public dynamic SelectedEditProductRawMaterial { get => _selectedEditProductRawMaterial; set { _selectedEditProductRawMaterial = value; OnPropertyChanged(); } }
         public AsyncObservableCollection<dynamic> EditProductRawMaterials { get => _editProductRawMaterials; set { _editProductRawMaterials = value; OnPropertyChanged(); } }
 
+        // Delete product
+        public bool IsOpenDeleteProductDialog { get => _isOpenDeleteProductDialog; set { _isOpenDeleteProductDialog = value; OnPropertyChanged(); } }
+
+        // Show product
+        public bool IsOpenShowProductDialog { get => _isOpenShowProductDialog; set { _isOpenShowProductDialog = value;
+                int ma = SelectedProduct.Ma;
+                SanPham showproduct = DataProvider.Ins.DB.SanPham.First(x => x.Ma ==ma);
+                ShowProductName = showproduct.Ten;
+                ShowProductCategory = showproduct.LoaiSanPham.Ten;
+                ShowProductPrice = showproduct.Gia;
+                ShowProductThumbnail = showproduct.Anh;
+                ShowProductRawMaterials = new AsyncObservableCollection<dynamic>();
+                foreach (var item in showproduct.NguyenLieu)
+                {
+                    ShowProductRawMaterials.Add(new {
+                        MaNL = item.MaNL,
+                        Ten = item.KhoNguyenLieu.Ten,
+                        DonVi = item.KhoNguyenLieu.DonVi,
+                        SoLuong = item.SoLuong,
+                    });
+                }
+                OnPropertyChanged(); } }
+        public string ShowProductName { get => _showProductName; set { _showProductName = value; OnPropertyChanged(); } }
+        public int ShowProductPrice { get => _showProductPrice; set { _showProductPrice = value; OnPropertyChanged(); } }
+        public byte[] ShowProductThumbnail { get => _showProductThumbnail; set { _showProductThumbnail = value; OnPropertyChanged(); } }
+        public string ShowProductCategory { get => _showProductCategory; set { _showProductCategory = value; OnPropertyChanged(); } }
+        public dynamic SelectedShowProductRawMaterial { get => _selectedShowProductRawMaterial; set { _selectedShowProductRawMaterial = value; OnPropertyChanged(); } }
+        public AsyncObservableCollection<dynamic> ShowProductRawMaterials { get => _showProductRawMaterials; set { _showProductRawMaterials = value; OnPropertyChanged(); } }
         #endregion
 
         #region command
@@ -205,6 +199,10 @@ namespace CoffeeShop.ViewModels
         public ICommand EditThumbnailCommand { get; set; }
         public ICommand AddEditProductRawMaterialCommand { get; set; }
         public ICommand DeleteEditProductRawMaterialCommand { get; set; }
+
+        public ICommand ClickDeleteProductButtonCommand { get; set; }
+        public ICommand DeleteProductCommand { get; set; }
+        public ICommand CloseShowProductCommand { get; set; }
 
         #endregion
 
@@ -270,6 +268,20 @@ namespace CoffeeShop.ViewModels
                         });
                     }
                     DataProvider.Ins.DB.SaveChanges();
+
+                    if (SelectedCategory.Ma == newsanpham.MaLoai)
+                    {
+
+                        // cập nhật danh sách
+                        Products.Remove(SelectedProduct);
+                        Products.Add(new
+                        {
+                            Ma = newsanpham.Ma,
+                            Ten = newsanpham.Ten,
+                            Anh = newsanpham.Anh,
+                            Gia = newsanpham.Gia,
+                        });
+                    }
                 }
                 IsOpenAddProductDialog = false;
             });
@@ -315,8 +327,49 @@ namespace CoffeeShop.ViewModels
             });
 
             ClickEditProductButtonCommand = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
-                SelectedProduct = param;
                 IsOpenEditProductDialog = true;
+                SelectedProduct = param;
+                int maSP = param.Ma;
+                SanPham sanpham = DataProvider.Ins.DB.SanPham.First(x => x.Ma == maSP);
+                EditProductName = sanpham.Ten;
+                EditProductPrice = sanpham.Gia;
+                EditProductCategories = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.LoaiSanPham)
+                {
+                    EditProductCategories.Add(new
+                    {
+                        Ma = item.Ma,
+                        Ten = item.Ten
+                    });
+                }
+                SelectedEditProductCategory = EditProductCategories.First(x => x.Ma == sanpham.MaLoai);
+                EditProductThumbnail = sanpham.Anh;
+                SelectedEditProductRawMaterial = null;
+                EditProductRawMaterials = new AsyncObservableCollection<dynamic>();
+                foreach (var item in sanpham.NguyenLieu)
+                {
+                    EditProductRawMaterials.Add(new
+                    {
+                        MaNL = item.MaNL,
+                        Ten = item.KhoNguyenLieu.Ten,
+                        DonVi = item.KhoNguyenLieu.DonVi,
+                        SoLuong = item.SoLuong,
+                    });
+                }
+                SelectedAddEditProductRawMaterial = null;
+                AddEditProductRawMaterials = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.KhoNguyenLieu)
+                {
+                    if (EditProductRawMaterials.Where(x => x.MaNL == item.MaNL).Count() == 0)
+                    {
+                        AddEditProductRawMaterials.Add(new
+                        {
+                            MaNL = item.MaNL,
+                            Ten = item.Ten,
+                            DonVi = item.DonVi,
+                        });
+                    }
+                }
             });
 
             EditProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
@@ -351,6 +404,19 @@ namespace CoffeeShop.ViewModels
                         });
                     }
                     DataProvider.Ins.DB.SaveChanges();
+
+                    // cập nhật danh sách
+                    Products.Remove(SelectedProduct);
+                    if (SelectedCategory.Ma == editsanpham.MaLoai)
+                    {
+                        Products.Add(new
+                        {
+                            Ma = editsanpham.Ma,
+                            Ten = editsanpham.Ten,
+                            Anh = editsanpham.Anh,
+                            Gia = editsanpham.Gia,
+                        });
+                    }
                 }
                 IsOpenEditProductDialog = false;
             });
@@ -394,6 +460,33 @@ namespace CoffeeShop.ViewModels
                     DonVi = param.DonVi,
                 });
                 EditProductRawMaterials.Remove(param);
+            });
+
+            ClickDeleteProductButtonCommand = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+                IsOpenDeleteProductDialog = true;
+                SelectedProduct = param;
+            });
+
+            DeleteProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
+                if (bool.Parse(param.ToString()) == true)
+                {
+                    int maDeleteProduct = SelectedProduct.Ma;
+
+                    // xóa sản phẩm chưa chỉnh sửa
+                    foreach (var item in DataProvider.Ins.DB.NguyenLieu.Where(x => x.MaSP == maDeleteProduct))
+                    {
+                        DataProvider.Ins.DB.NguyenLieu.Remove(item);
+                    }
+                    DataProvider.Ins.DB.SanPham.Remove(DataProvider.Ins.DB.SanPham.First(x => x.Ma == maDeleteProduct));
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+                Products.Remove(SelectedProduct);
+                IsOpenDeleteProductDialog = false;
+            });
+
+            CloseShowProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
+                IsOpenShowProductDialog = false;
+                SelectedProduct = null;
             });
         }
 

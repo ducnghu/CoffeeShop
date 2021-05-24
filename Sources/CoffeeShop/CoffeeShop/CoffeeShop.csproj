@@ -122,6 +122,7 @@
     <Compile Include="Models\NguyenLieu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NumberToVNDConverter.cs" />
     <Compile Include="Models\SanPham.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

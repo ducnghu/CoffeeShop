@@ -165,6 +165,10 @@ namespace CoffeeShop.ViewModels
                 {
                     string ten = SelectedRawMaterial.Ten;
                     KhoNguyenLieu deletekhonguyenlieu = DataProvider.Ins.DB.KhoNguyenLieu.First(x => x.Ten == ten);
+                    foreach (var item in DataProvider.Ins.DB.NguyenLieu.Where(x=>x.MaNL==deletekhonguyenlieu.MaNL))
+                    {
+                        DataProvider.Ins.DB.NguyenLieu.Remove(item);
+                    }
                     DataProvider.Ins.DB.KhoNguyenLieu.Remove(deletekhonguyenlieu);
                     DataProvider.Ins.DB.SaveChanges();
                     RawMaterials.Remove(SelectedRawMaterial);
