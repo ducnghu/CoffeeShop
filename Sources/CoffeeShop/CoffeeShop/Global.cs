@@ -50,16 +50,6 @@ namespace CoffeeShop
             }
         }
 
-        public bool ConfirmMessageDelete()
-        {
-            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa dữ liệu này ? Dữ liệu sẽ bị xóa vĩnh viễn !", "CẢNH BÁO", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
-            {
-                return true;
-            }
-            else return false;
-        }
-
         #region Panel
         private String _homeColor;
         private String _homeTextColor;
@@ -69,6 +59,9 @@ namespace CoffeeShop
 
         private String _productColor;
         private String _productTextColor;
+
+        private String _receiptColor;
+        private String _receiptTextColor;
 
         private String _settingColor;
         private String _settingTextColor;
@@ -81,6 +74,9 @@ namespace CoffeeShop
 
         public String ProductColor { get => _productColor; set { _productColor = value; OnPropertyChanged("ProductColor"); } }
         public String ProductTextColor { get => _productTextColor; set { _productTextColor = value; OnPropertyChanged("ProductTextColor"); } }
+
+        public String ReceiptColor { get => _receiptColor; set { _receiptColor = value; OnPropertyChanged("ReceiptColor"); } }
+        public String ReceiptTextColor { get => _receiptTextColor; set { _receiptTextColor = value; OnPropertyChanged("ReceiptTextColor"); } }
 
         public String SettingColor { get => _settingColor; set { _settingColor = value; OnPropertyChanged("SettingColor"); } }
         public String SettingTextColor { get => _settingTextColor; set { _settingTextColor = value; OnPropertyChanged("SettingTextColor"); } }

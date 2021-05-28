@@ -5,6 +5,7 @@
     <viewmodel:HomeViewModel x:Key="HVM"/>
     <viewmodel:WarehouseViewModel x:Key="WVM"/>
     <viewmodel:ProductViewModel x:Key="PVM"/>
+    <viewmodel:ReceiptViewModel x:Key="RVM"/>
     <viewmodel:SettingViewModel x:Key="SVM"/>
 
 </ResourceDictionary>

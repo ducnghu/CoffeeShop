@@ -26,6 +26,13 @@ namespace CoffeeShop.ViewModels
         private int _presentRawMaterialAmount;
         private int _changeRawMaterialAmount;
 
+        // search
+        private string _search;
+
+        // mesage
+        private string _message;
+        private bool _isOpenMessageDialog;
+
         #endregion
 
         #region properties
@@ -56,6 +63,31 @@ namespace CoffeeShop.ViewModels
         public int PresentRawMaterialAmount { get => _presentRawMaterialAmount; set { _presentRawMaterialAmount = value; OnPropertyChanged(); } }
         public int ChangeRawMaterialAmount { get => _changeRawMaterialAmount; set { _changeRawMaterialAmount = value; OnPropertyChanged(); } }
 
+        //search
+        public string Search
+        {
+            get => _search; set
+            {
+                _search = value;
+                RawMaterials = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.KhoNguyenLieu)
+                {
+                    RawMaterials.Add(new
+                    {
+                        Ten = item.Ten,
+                        SoLuong = item.SoLuong,
+                        DonVi = item.DonVi
+                    });
+                }
+                RawMaterials = SearchByName(Search, RawMaterials);
+                OnPropertyChanged();
+            }
+        }
+
+        // message
+        public string Message { get => _message; set { _message = value; OnPropertyChanged(); } }
+        public bool IsOpenMessageDialog { get => _isOpenMessageDialog; set { _isOpenMessageDialog = value; OnPropertyChanged(); } }
+
         #endregion
 
         #region Commands
@@ -65,6 +97,7 @@ namespace CoffeeShop.ViewModels
         public ICommand ClickChangeAmountRawMaterialCommand { get; set; }
         public ICommand DeleteRawMaterialCommand { get; set; }
         public ICommand ClickDeleteRawMaterialCommand { get; set; }
+        public ICommand CloseMessageDialog { get; set; }
 
         #endregion
 
@@ -109,24 +142,49 @@ namespace CoffeeShop.ViewModels
             {
                 if (bool.Parse(param.ToString()) == true)
                 {
-                    KhoNguyenLieu newRawMaterial = new KhoNguyenLieu {
-                        MaNL = (DataProvider.Ins.DB.KhoNguyenLieu.Count() == 0) ? 1 : DataProvider.Ins.DB.KhoNguyenLieu.Max(x => x.MaNL) + 1,
-                        Ten = NewRawMaterialName,
-                        SoLuong = NewRawMaterialAmount,
-                        DonVi = NewRawMaterialUnit
-                    };
-
-                    DataProvider.Ins.DB.KhoNguyenLieu.Add(newRawMaterial);
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    RawMaterials.Add(new KhoNguyenLieu
+                    if (NewRawMaterialName == null || NewRawMaterialName.Split(' ').Length == NewRawMaterialName.Length + 1)
                     {
-                        Ten = NewRawMaterialName,
-                        SoLuong = NewRawMaterialAmount,
-                        DonVi = NewRawMaterialUnit
-                    });
+                        Message = "Vui lòng không để trống tên nguyên liệu";
+                        IsOpenMessageDialog = true;
+                    }
+                    else if (NewRawMaterialAmount < 0)
+                    {
+                        Message = "Vui lòng đặt số lượng hợp lý";
+                        IsOpenMessageDialog = true;
+                    }
+                    else if (NewRawMaterialUnit == null || NewRawMaterialUnit.Split(' ').Length == NewRawMaterialUnit.Length + 1)
+                    {
+                        Message = "Vui lòng không để trống tên đơn vị";
+                        IsOpenMessageDialog = true;
+                    }
+                    else
+                    {
+                        KhoNguyenLieu newRawMaterial = new KhoNguyenLieu
+                        {
+                            MaNL = (DataProvider.Ins.DB.KhoNguyenLieu.Count() == 0) ? 1 : DataProvider.Ins.DB.KhoNguyenLieu.Max(x => x.MaNL) + 1,
+                            Ten = NewRawMaterialName,
+                            SoLuong = NewRawMaterialAmount,
+                            DonVi = NewRawMaterialUnit
+                        };
+
+                        DataProvider.Ins.DB.KhoNguyenLieu.Add(newRawMaterial);
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        RawMaterials.Add(new KhoNguyenLieu
+                        {
+                            Ten = NewRawMaterialName,
+                            SoLuong = NewRawMaterialAmount,
+                            DonVi = NewRawMaterialUnit
+                        });
+                        IsOpenAddRawMaterialDialog = false;
+                    }
                 }
-                IsOpenAddRawMaterialDialog = false;
+                else
+                {
+                    IsOpenAddRawMaterialDialog = false;
+
+                }
+
             });
 
             ClickChangeAmountRawMaterialCommand = new RelayCommand<dynamic>((param) => { return true; }, (param) =>
@@ -139,18 +197,32 @@ namespace CoffeeShop.ViewModels
             {
                 if (bool.Parse(param.ToString()) == true)
                 {
-                    string ten = SelectedRawMaterial.Ten;
-                    int soluong = SelectedRawMaterial.SoLuong;
-                    DataProvider.Ins.DB.KhoNguyenLieu.First(x => x.Ten == ten).SoLuong += ChangeRawMaterialAmount;
-                    DataProvider.Ins.DB.SaveChanges();
-                    RawMaterials.Add(new { 
-                        Ten = SelectedRawMaterial.Ten,
-                        SoLuong = soluong + ChangeRawMaterialAmount,
-                        DonVi = SelectedRawMaterial.DonVi
-                    });
-                    RawMaterials.Remove(SelectedRawMaterial);
+                    if (PresentRawMaterialAmount + ChangeRawMaterialAmount < 0)
+                    {
+                        Message = "Vui lòng nhập số lượng thay đổi hợp lý";
+                        IsOpenMessageDialog = true;
+                    }
+                    else
+                    {
+                        string ten = SelectedRawMaterial.Ten;
+                        int soluong = SelectedRawMaterial.SoLuong;
+                        DataProvider.Ins.DB.KhoNguyenLieu.First(x => x.Ten == ten).SoLuong += ChangeRawMaterialAmount;
+                        DataProvider.Ins.DB.SaveChanges();
+                        RawMaterials.Add(new
+                        {
+                            Ten = SelectedRawMaterial.Ten,
+                            SoLuong = soluong + ChangeRawMaterialAmount,
+                            DonVi = SelectedRawMaterial.DonVi
+                        });
+                        RawMaterials.Remove(SelectedRawMaterial);
+                        IsOpenChangeAmountRawMaterialDialog = false;
+                    }
                 }
-                IsOpenChangeAmountRawMaterialDialog = false;
+                else
+                {
+                    IsOpenChangeAmountRawMaterialDialog = false;
+
+                }
             });
 
             ClickDeleteRawMaterialCommand = new RelayCommand<dynamic>((param) => { return true; }, (param) =>
@@ -175,6 +247,11 @@ namespace CoffeeShop.ViewModels
                 }
                 IsOpenDeleteRawMaterialDialog = false;
             });
+
+            CloseMessageDialog = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+                IsOpenMessageDialog = false;
+            });
+
         }
     }
 }

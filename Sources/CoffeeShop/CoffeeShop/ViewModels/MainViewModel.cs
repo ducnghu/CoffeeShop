@@ -25,6 +25,7 @@ namespace CoffeeShop.ViewModels
         public ICommand HomeCommand { get; set; }
         public ICommand WarehouseCommand { get; set; }
         public ICommand ProductCommand { get; set; }
+        public ICommand ReceiptCommand { get; set; }
         public ICommand SettingCommand { get; set; }
         #endregion
 
@@ -87,6 +88,15 @@ namespace CoffeeShop.ViewModels
 
             });
 
+            ReceiptCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
+            {
+                ResetPanelColor();
+                global.ReceiptColor = Brushes.SaddleBrown.ToString();
+                global.ReceiptTextColor = Brushes.White.ToString();
+                global.CurrentPageViewModel = ReceiptViewModel.GetInstance();
+
+            });
+
             SettingCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
                 ResetPanelColor();
@@ -110,6 +120,9 @@ namespace CoffeeShop.ViewModels
 
             global.SettingColor = Brushes.White.ToString();
             global.SettingTextColor = Brushes.Gray.ToString();
+
+            global.ReceiptColor = Brushes.White.ToString();
+            global.ReceiptTextColor = Brushes.Gray.ToString();
         }
     }
 }

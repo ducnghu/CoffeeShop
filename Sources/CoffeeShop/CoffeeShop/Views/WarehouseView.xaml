@@ -22,6 +22,35 @@
              d:DesignHeight="850" d:DesignWidth="1400">
     <Grid>
 
+        <!--Cảnh báo-->
+        <materialDesign:DialogHost IsOpen="{Binding IsOpenMessageDialog}"
+                    Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
+                    DialogMargin="8" Panel.ZIndex="2"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualWidth}"
+                                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}">
+
+            <!--Nội dung dialog cảnh báo-->
+            <materialDesign:DialogHost.DialogContent>
+
+                <StackPanel Margin="16">
+                    <TextBlock Margin="5 10"
+                                  VerticalAlignment="Center"
+                                  FontSize="20" Text="{Binding Message}">
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsCancel="True"
+                                  IsDefault="True"
+                                  Margin="0 8 8 0"
+                                  Command="{Binding CloseMessageDialog}"  CommandParameter="true">
+                            CLOSE
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
         <!--Thêm nguyên liệu-->
         <materialDesign:DialogHost IsOpen="{Binding IsOpenAddRawMaterialDialog}"
                     Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
@@ -224,6 +253,20 @@
                 <TextBlock DockPanel.Dock="Left" FontSize="40" FontWeight="DemiBold" Margin="10" Width="300">
                     Kho nguyên liệu
                 </TextBlock>
+
+                <!--Search Bar-->
+                <Border BorderThickness="1" BorderBrush="SaddleBrown" CornerRadius="10" Margin="100 10">
+                    <StackPanel  Orientation="Horizontal" Margin="10">
+                        <materialDesign:PackIcon Foreground="Gray" VerticalAlignment="Center" Kind="Magnify" Width="30" Height="30" />
+                        <TextBox DockPanel.Dock="Right"
+                            VerticalAlignment="Center"
+                            Width="250"
+                            Height="30"
+                            AcceptsReturn="True"
+                            materialDesign:HintAssist.Hint="Search for raw materials"
+                            Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </Border>
 
                 <!--Nút thêm nguyên liệu-->
                 <Button DockPanel.Dock="Right" Width="170" Height="55" Background="White" BorderThickness="1" BorderBrush="SaddleBrown"  ToolTip="Add New Raw Material" HorizontalAlignment="Right"

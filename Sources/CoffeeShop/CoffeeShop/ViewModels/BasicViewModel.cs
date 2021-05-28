@@ -174,7 +174,7 @@ namespace CoffeeShop.ViewModels
 
                 foreach (dynamic item in inputList)
                 {
-                    rawTable.Rows.Add(item.Name, 0, 0, 0);
+                    rawTable.Rows.Add(item.Ten, 0, 0, 0);
                 }
 
                 DataTable notTable = new DataTable();
@@ -249,7 +249,7 @@ namespace CoffeeShop.ViewModels
 
                     for (int listIndex = 0; listIndex < listRange; listIndex++)
                     {
-                        if (resultTable.Rows[tableIndex].Field<string>(0) == inputList[listIndex].Name)
+                        if (resultTable.Rows[tableIndex].Field<string>(0) == inputList[listIndex].Ten)
                         {
                             outputList.Add(inputList[listIndex]);
                             break;

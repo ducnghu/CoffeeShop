@@ -23,6 +23,9 @@ namespace CoffeeShop.ViewModels
         private AsyncObservableCollection<dynamic> _products;
         private dynamic _selectedProduct;
 
+        // search
+        private string _search;
+
         // Add product
         private bool _isOpenAddProductDialog;
         private string _newProductName;
@@ -63,6 +66,10 @@ namespace CoffeeShop.ViewModels
         private dynamic _selectedShowProductRawMaterial;
         private AsyncObservableCollection<dynamic> _showProductRawMaterials;
 
+        // mesage
+        private string _message;
+        private bool _isOpenMessageDialog;
+
         #endregion
 
         #region properties
@@ -89,6 +96,22 @@ namespace CoffeeShop.ViewModels
                 {
                     IsOpenShowProductDialog = true;
                 }
+                OnPropertyChanged(); } }
+
+        //search
+        public string Search { get => _search; set { _search = value;
+                Products = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.SanPham)
+                {
+                    Products.Add(new
+                    {
+                        Ma = item.Ma,
+                        Ten = item.Ten,
+                        Gia = item.Gia,
+                        Anh = item.Anh,
+                    });
+                }
+                Products = SearchByName(Search, Products);
                 OnPropertyChanged(); } }
 
         // Add product
@@ -183,6 +206,11 @@ namespace CoffeeShop.ViewModels
         public string ShowProductCategory { get => _showProductCategory; set { _showProductCategory = value; OnPropertyChanged(); } }
         public dynamic SelectedShowProductRawMaterial { get => _selectedShowProductRawMaterial; set { _selectedShowProductRawMaterial = value; OnPropertyChanged(); } }
         public AsyncObservableCollection<dynamic> ShowProductRawMaterials { get => _showProductRawMaterials; set { _showProductRawMaterials = value; OnPropertyChanged(); } }
+
+        // message
+        public string Message { get => _message; set { _message = value; OnPropertyChanged(); } }
+        public bool IsOpenMessageDialog { get => _isOpenMessageDialog; set { _isOpenMessageDialog = value; OnPropertyChanged(); } }
+
         #endregion
 
         #region command
@@ -203,6 +231,8 @@ namespace CoffeeShop.ViewModels
         public ICommand ClickDeleteProductButtonCommand { get; set; }
         public ICommand DeleteProductCommand { get; set; }
         public ICommand CloseShowProductCommand { get; set; }
+
+        public ICommand CloseMessageDialog { get; set; }
 
         #endregion
 
@@ -251,39 +281,68 @@ namespace CoffeeShop.ViewModels
             AddProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
                 if (bool.Parse(param.ToString()) == true)
                 {
-                    SanPham newsanpham = new SanPham();
-                    newsanpham.Ma = (DataProvider.Ins.DB.SanPham.Count() == 0) ? 1 : DataProvider.Ins.DB.SanPham.Max(x => x.Ma) + 1;
-                    newsanpham.Ten = NewProductName;
-                    newsanpham.MaLoai = SelectedNewProductCategory.Ma;
-                    newsanpham.Gia = NewProductPrice;
-                    newsanpham.Anh = NewProductThumbnail;
-                    DataProvider.Ins.DB.SanPham.Add(newsanpham);
-                    DataProvider.Ins.DB.SaveChanges();
-                    foreach (var item in NewProductRawMaterials)
+                    if (NewProductName == null || NewProductName.Split(' ').Length == NewProductName.Length + 1)
                     {
-                        DataProvider.Ins.DB.NguyenLieu.Add(new NguyenLieu { 
-                            MaSP = newsanpham.Ma,
-                            MaNL = item.MaNL,
-                            SoLuong = item.SoLuong,
-                        });
+                        Message = "Vui lòng không để trống tên sản phẩm";
+                        IsOpenMessageDialog = true;
                     }
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    if (SelectedCategory.Ma == newsanpham.MaLoai)
+                    else if (SelectedNewProductCategory == null)
                     {
-
-                        // cập nhật danh sách
-                        Products.Remove(SelectedProduct);
-                        Products.Add(new
+                        Message = "Vui lòng chọn loại sản phẩm";
+                        IsOpenMessageDialog = true;
+                    }
+                    else if (NewProductPrice <= 0)
+                    {
+                        Message = "Vui lòng đặt giá sản phẩm hợp lý";
+                        IsOpenMessageDialog = true;
+                    }
+                    else if (NewProductThumbnail == null)
+                    {
+                        Message = "Vui lòng không để trống ảnh sản phẩm";
+                        IsOpenMessageDialog = true;
+                    }
+                    else
+                    {
+                        SanPham newsanpham = new SanPham();
+                        newsanpham.Ma = (DataProvider.Ins.DB.SanPham.Count() == 0) ? 1 : DataProvider.Ins.DB.SanPham.Max(x => x.Ma) + 1;
+                        newsanpham.Ten = NewProductName;
+                        newsanpham.MaLoai = SelectedNewProductCategory.Ma;
+                        newsanpham.Gia = NewProductPrice;
+                        newsanpham.Anh = NewProductThumbnail;
+                        DataProvider.Ins.DB.SanPham.Add(newsanpham);
+                        DataProvider.Ins.DB.SaveChanges();
+                        foreach (var item in NewProductRawMaterials)
                         {
-                            Ma = newsanpham.Ma,
-                            Ten = newsanpham.Ten,
-                            Anh = newsanpham.Anh,
-                            Gia = newsanpham.Gia,
-                        });
+                            DataProvider.Ins.DB.NguyenLieu.Add(new NguyenLieu
+                            {
+                                MaSP = newsanpham.Ma,
+                                MaNL = item.MaNL,
+                                SoLuong = item.SoLuong,
+                            });
+                        }
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        if (SelectedCategory.Ma == newsanpham.MaLoai)
+                        {
+
+                            // cập nhật danh sách
+                            Products.Remove(SelectedProduct);
+                            Products.Add(new
+                            {
+                                Ma = newsanpham.Ma,
+                                Ten = newsanpham.Ten,
+                                Anh = newsanpham.Anh,
+                                Gia = newsanpham.Gia,
+                            });
+                        }
+                        IsOpenAddProductDialog = false;
                     }
                 }
-                IsOpenAddProductDialog = false;
+                else
+                {
+                    IsOpenAddProductDialog = false;
+
+                }
             });
 
             AddThumbnailCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
@@ -375,50 +434,78 @@ namespace CoffeeShop.ViewModels
             EditProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
                 if (bool.Parse(param.ToString()) == true)
                 {
-                    int masanphamcu = SelectedProduct.Ma;
-
-                    // xóa sản phẩm chưa chỉnh sửa
-                    foreach (var item in DataProvider.Ins.DB.NguyenLieu.Where(x=>x.MaSP==masanphamcu))
+                    if (EditProductName == null || EditProductName.Split(' ').Length == NewProductName.Length + 1)
                     {
-                        DataProvider.Ins.DB.NguyenLieu.Remove(item);
+                        Message = "Vui lòng không để trống tên sản phẩm";
+                        IsOpenMessageDialog = true;
                     }
-                    DataProvider.Ins.DB.SanPham.Remove(DataProvider.Ins.DB.SanPham.First(x => x.Ma == masanphamcu));
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    //Thêm sản phẩm đã chỉnh sửa
-                    SanPham editsanpham = new SanPham();
-                    editsanpham.Ma = (DataProvider.Ins.DB.SanPham.Count() == 0) ? 1 : DataProvider.Ins.DB.SanPham.Max(x => x.Ma) + 1;
-                    editsanpham.Ten = EditProductName;
-                    editsanpham.MaLoai = SelectedEditProductCategory.Ma;
-                    editsanpham.Gia = EditProductPrice;
-                    editsanpham.Anh = EditProductThumbnail;
-                    DataProvider.Ins.DB.SanPham.Add(editsanpham);
-                    DataProvider.Ins.DB.SaveChanges();
-                    foreach (var item in EditProductRawMaterials)
+                    else if (SelectedEditProductCategory == null)
                     {
-                        DataProvider.Ins.DB.NguyenLieu.Add(new NguyenLieu
-                        {
-                            MaSP = editsanpham.Ma,
-                            MaNL = item.MaNL,
-                            SoLuong = item.SoLuong,
-                        });
+                        Message = "Vui lòng chọn loại sản phẩm";
+                        IsOpenMessageDialog = true;
                     }
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    // cập nhật danh sách
-                    Products.Remove(SelectedProduct);
-                    if (SelectedCategory.Ma == editsanpham.MaLoai)
+                    else if (EditProductPrice <= 0)
                     {
-                        Products.Add(new
+                        Message = "Vui lòng đặt giá sản phẩm hợp lý";
+                        IsOpenMessageDialog = true;
+                    }
+                    else if (EditProductThumbnail == null)
+                    {
+                        Message = "Vui lòng không để trống ảnh sản phẩm";
+                        IsOpenMessageDialog = true;
+                    }
+                    else
+                    {
+                        int masanphamcu = SelectedProduct.Ma;
+
+                        // xóa sản phẩm chưa chỉnh sửa
+                        foreach (var item in DataProvider.Ins.DB.NguyenLieu.Where(x => x.MaSP == masanphamcu))
                         {
-                            Ma = editsanpham.Ma,
-                            Ten = editsanpham.Ten,
-                            Anh = editsanpham.Anh,
-                            Gia = editsanpham.Gia,
-                        });
+                            DataProvider.Ins.DB.NguyenLieu.Remove(item);
+                        }
+                        DataProvider.Ins.DB.SanPham.Remove(DataProvider.Ins.DB.SanPham.First(x => x.Ma == masanphamcu));
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        //Thêm sản phẩm đã chỉnh sửa
+                        SanPham editsanpham = new SanPham();
+                        editsanpham.Ma = (DataProvider.Ins.DB.SanPham.Count() == 0) ? 1 : DataProvider.Ins.DB.SanPham.Max(x => x.Ma) + 1;
+                        editsanpham.Ten = EditProductName;
+                        editsanpham.MaLoai = SelectedEditProductCategory.Ma;
+                        editsanpham.Gia = EditProductPrice;
+                        editsanpham.Anh = EditProductThumbnail;
+                        DataProvider.Ins.DB.SanPham.Add(editsanpham);
+                        DataProvider.Ins.DB.SaveChanges();
+                        foreach (var item in EditProductRawMaterials)
+                        {
+                            DataProvider.Ins.DB.NguyenLieu.Add(new NguyenLieu
+                            {
+                                MaSP = editsanpham.Ma,
+                                MaNL = item.MaNL,
+                                SoLuong = item.SoLuong,
+                            });
+                        }
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        // cập nhật danh sách
+                        Products.Remove(SelectedProduct);
+                        if (SelectedCategory.Ma == editsanpham.MaLoai)
+                        {
+                            Products.Add(new
+                            {
+                                Ma = editsanpham.Ma,
+                                Ten = editsanpham.Ten,
+                                Anh = editsanpham.Anh,
+                                Gia = editsanpham.Gia,
+                            });
+                        }
+                        IsOpenEditProductDialog = false;
                     }
                 }
-                IsOpenEditProductDialog = false;
+                else
+                {
+                    IsOpenEditProductDialog = false;
+
+                }
             });
 
             EditThumbnailCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
@@ -487,6 +574,10 @@ namespace CoffeeShop.ViewModels
             CloseShowProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
                 IsOpenShowProductDialog = false;
                 SelectedProduct = null;
+            });
+
+            CloseMessageDialog = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+                IsOpenMessageDialog = false;
             });
         }
 
