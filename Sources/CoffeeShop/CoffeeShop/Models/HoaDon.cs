@@ -15,6 +15,11 @@ namespace CoffeeShop.Models
     
     public partial class HoaDon : BaseViewModel
     {
+        public HoaDon()
+        {
+            this.ChiTietHoaDon = new HashSet<ChiTietHoaDon>();
+        }
+
         #region private variables
         private int _ma;
         private System.DateTime _ngayTao;
@@ -33,7 +38,7 @@ namespace CoffeeShop.Models
 
         #endregion
 
-        public virtual ChiTietHoaDon ChiTietHoaDon { get; set; }
+        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDon { get; set; }
         public virtual KhachHang KhachHang { get; set; }
     }
 }

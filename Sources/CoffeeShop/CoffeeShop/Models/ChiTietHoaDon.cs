@@ -15,8 +15,9 @@ namespace CoffeeShop.Models
     
     public partial class ChiTietHoaDon : BaseViewModel
     {
-        
+
         #region private variables
+        private int _ma;
         private int _maHD;
         private string _tenSP;
         private int _soLuong;
@@ -25,13 +26,14 @@ namespace CoffeeShop.Models
         #endregion
 
         #region properties
+        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
         public int MaHD { get => _maHD; set { _maHD = value; OnPropertyChanged(); } }
         public string TenSP { get => _tenSP; set { _tenSP = value; OnPropertyChanged(); } }
         public int SoLuong { get => _soLuong; set { _soLuong = value; OnPropertyChanged(); } }
         public int GiaSP { get => _giaSP; set { _giaSP = value; OnPropertyChanged(); } }
 
         #endregion
-
+    
         public virtual HoaDon HoaDon { get; set; }
     }
 }

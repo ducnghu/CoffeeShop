@@ -32,5 +32,7 @@ namespace CoffeeShop.Models
         public DbSet<LoaiSanPham> LoaiSanPham { get; set; }
         public DbSet<NguyenLieu> NguyenLieu { get; set; }
         public DbSet<SanPham> SanPham { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<ThongSo> ThongSo { get; set; }
     }
 }
