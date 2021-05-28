@@ -91,6 +91,7 @@ namespace CoffeeShop.ViewModels
         #endregion
 
         #region Commands
+        public ICommand Loaded { get; set; }
         public ICommand AddRawMaterialCommand { get; set; }
         public ICommand ClickAddRawMaterialButtonCommand { get; set; }
         public ICommand ChangeAmountRawMaterialCommand { get; set; }
@@ -119,20 +120,25 @@ namespace CoffeeShop.ViewModels
 
         public WarehouseViewModel()
         {
-            // Setup dữ liệu
-            IsOpenAddRawMaterialDialog = false;
-            // Danh sách nguyên liệu trong kho
-            RawMaterials = new AsyncObservableCollection<dynamic>();
-            foreach (var item in DataProvider.Ins.DB.KhoNguyenLieu)
-            {
-                RawMaterials.Add(new { 
-                    Ten = item.Ten,
-                    SoLuong = item.SoLuong,
-                    DonVi = item.DonVi
-                });
-            }
-
             //Command
+            Loaded = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+
+                // Setup dữ liệu
+                IsOpenAddRawMaterialDialog = false;
+                // Danh sách nguyên liệu trong kho
+                RawMaterials = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.KhoNguyenLieu)
+                {
+                    RawMaterials.Add(new
+                    {
+                        Ten = item.Ten,
+                        SoLuong = item.SoLuong,
+                        DonVi = item.DonVi
+                    });
+                }
+            });
+
+
             ClickAddRawMaterialButtonCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
                 IsOpenAddRawMaterialDialog = true;

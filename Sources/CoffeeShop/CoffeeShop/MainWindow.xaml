@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         xmlns:viewmodels="clr-namespace:CoffeeShop.ViewModels"
         xmlns:views="clr-namespace:CoffeeShop.Views"
+        xmlns:models="clr-namespace:CoffeeShop.Models"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          TextElement.FontWeight="Regular"
@@ -20,6 +21,7 @@
             DataContext="{StaticResource MVM}"
         Title="CoffeeShop" Height="850" Width="1520">
     <Window.Resources>
+
         <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
             <views:HomeView DataContext="{Binding}"/>
             <!-- This is a UserControl -->
@@ -49,64 +51,135 @@
                       ObjectType="{x:Type local:Global}"
                       MethodName="GetInstance" />
     </Window.Resources>
-    
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Left">
-            <StackPanel Height="auto" Width="130" Margin="5" Orientation="Vertical">
-                <!--Home button-->
-                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding HomeCommand}">
-                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=HomeColor}" Width="110" Height="90">
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="CartOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=HomeTextColor}"/>
-                            <TextBlock Text="Home" Foreground="{Binding Source={StaticResource Global},Path=HomeTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                </Button>
+    <Grid>
+        
+        <!--Cảnh báo-->
+        <materialDesign:DialogHost IsOpen="{Binding IsOpenMessageDialog}"
+                    Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
+                    DialogMargin="8" Panel.ZIndex="2"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualWidth}"
+                                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}">
 
-                <!--Warehouse button-->
-                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding WarehouseCommand}">
-                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=WarehouseColor}" Width="110" Height="90">
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Warehouse" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=WarehouseTextColor}"/>
-                            <TextBlock Text="Warehouse" Foreground="{Binding Source={StaticResource Global},Path=WarehouseTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                </Button>
+            <!--Nội dung dialog cảnh báo-->
+            <materialDesign:DialogHost.DialogContent>
 
-                <!--Product button-->
-                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding ProductCommand}">
-                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=ProductColor}" Width="110" Height="90">
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="CoffeeOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=ProductTextColor}"/>
-                            <TextBlock Text="Product" Foreground="{Binding Source={StaticResource Global},Path=ProductTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                </Button>
+                <StackPanel Margin="16">
+                    <TextBlock Margin="5 10"
+                                  VerticalAlignment="Center"
+                                  FontSize="20" Text="{Binding Message}">
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsCancel="True"
+                                  IsDefault="True"
+                                  Margin="0 8 8 0"
+                                  Command="{Binding CloseMessageDialog}"  CommandParameter="true">
+                            CLOSE
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
 
-                <!--Receipt button-->
-                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding ReceiptCommand}">
-                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=ReceiptColor}" Width="110" Height="90">
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Receipt" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=ReceiptTextColor}"/>
-                            <TextBlock Text="Receipt" Foreground="{Binding Source={StaticResource Global},Path=ReceiptTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                </Button>
+        <!--Nhập mã bảo mật-->
+        <materialDesign:DialogHost IsOpen="{Binding IsOpenEnterPasswordDialog}"
+                    Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
+                    DialogMargin="8" Panel.ZIndex="1"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualWidth}"
+                                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}">
 
-                <!--Setting button-->
-                <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding SettingCommand}">
-                    <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=SettingColor}" Width="110" Height="90">
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="CogOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=SettingTextColor}"/>
-                            <TextBlock Text="Setting" Foreground="{Binding Source={StaticResource Global},Path=SettingTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
-                        </StackPanel>
-                    </Border>
-                </Button>
-                
-            </StackPanel>
-            <ContentControl Grid.Column="1" DockPanel.Dock="Right" Margin="10 0" Content="{Binding Source={StaticResource Global},Path=CurrentPageViewModel}">
+            <!--Nội dung dialog cảnh báo-->
+            <materialDesign:DialogHost.DialogContent>
 
-            </ContentControl>
+                <StackPanel Margin="16">
+                    <PasswordBox Margin="5 10"
+                                      materialDesign:HintAssist.Hint="MẬT KHẨU"
+                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                      VerticalAlignment="Center"
+                                      FontSize="20"
+                        x:Name="PasswordBox"
+                        models:PasswordBoxAssistant.BindPassword="true"  models:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    </PasswordBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsDefault="True"
+                                  Margin="0 8 8 0"
+                                  Command="{Binding CloseEnterPasswordDialog}"  CommandParameter="true">
+                            ENTER
+                        </Button>
+                        <Button
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsCancel="True"
+                                  Margin="0 8 8 0"
+                                  Command="{Binding CloseEnterPasswordDialog}"  CommandParameter="false">
+                            CLOSE
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Left">
+                <StackPanel Height="auto" Width="130" Margin="5" Orientation="Vertical">
+                    <!--Home button-->
+                    <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding HomeCommand}">
+                        <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=HomeColor}" Width="110" Height="90">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="CartOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=HomeTextColor}"/>
+                                <TextBlock Text="Home" Foreground="{Binding Source={StaticResource Global},Path=HomeTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <!--Warehouse button-->
+                    <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding WarehouseCommand}">
+                        <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=WarehouseColor}" Width="110" Height="90">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Warehouse" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=WarehouseTextColor}"/>
+                                <TextBlock Text="Warehouse" Foreground="{Binding Source={StaticResource Global},Path=WarehouseTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <!--Product button-->
+                    <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding ProductCommand}">
+                        <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=ProductColor}" Width="110" Height="90">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="CoffeeOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=ProductTextColor}"/>
+                                <TextBlock Text="Product" Foreground="{Binding Source={StaticResource Global},Path=ProductTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <!--Receipt button-->
+                    <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding ReceiptCommand}">
+                        <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=ReceiptColor}" Width="110" Height="90">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Receipt" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=ReceiptTextColor}"/>
+                                <TextBlock Text="Receipt" Foreground="{Binding Source={StaticResource Global},Path=ReceiptTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <!--Setting button-->
+                    <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding SettingCommand}">
+                        <Border CornerRadius="15" Margin="0"  Background="{Binding Source={StaticResource Global},Path=SettingColor}" Width="110" Height="90">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="CogOutline" Width="50" Height="50" HorizontalAlignment="Center"  Foreground="{Binding Source={StaticResource Global},Path=SettingTextColor}"/>
+                                <TextBlock Text="Setting" Foreground="{Binding Source={StaticResource Global},Path=SettingTextColor}" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                </StackPanel>
+                <ContentControl Grid.Column="1" DockPanel.Dock="Right" Margin="10 0" Content="{Binding Source={StaticResource Global},Path=CurrentPageViewModel}">
+
+                </ContentControl>
+            </DockPanel>
         </DockPanel>
-    </DockPanel>
+
+    </Grid>
 </Window>

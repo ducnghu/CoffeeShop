@@ -7,9 +7,9 @@
              xmlns:models="clr-namespace:CoffeeShop.Models"
              xmlns:vm="clr-namespace:CoffeeShop.ViewModels"
              
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"              
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
@@ -20,6 +20,13 @@
 
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1400">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
 
         <!--Cảnh báo-->

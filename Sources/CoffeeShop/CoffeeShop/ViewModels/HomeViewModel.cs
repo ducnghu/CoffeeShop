@@ -83,7 +83,8 @@ namespace CoffeeShop.ViewModels
         // Cart
         public bool HasCustomer { get => _hasCustomer; set { _hasCustomer = value; OnPropertyChanged(); } }
         public dynamic SelectedCartProduct { get => _selectedCartProduct; set { _selectedCartProduct = value; OnPropertyChanged(); } }
-        public AsyncObservableCollection<dynamic> CartProducts { get => _cartProducts; set { _cartProducts = value; OnPropertyChanged(); } }
+        public AsyncObservableCollection<dynamic> CartProducts { get => _cartProducts; set { _cartProducts = value; 
+                OnPropertyChanged(); } }
         public int TongTien { get => _tongTien; set { _tongTien = value; OnPropertyChanged(); } }
 
         // message
@@ -114,6 +115,7 @@ namespace CoffeeShop.ViewModels
         #endregion
 
         #region command
+        public ICommand Loaded { get; set; }
         public ICommand ChangeCategoryCommand { get; set; }
         public ICommand ClickCheckCustommerButtonCommand { get; set; }
         public ICommand CloseMessageDialog { get; set; }
@@ -143,24 +145,28 @@ namespace CoffeeShop.ViewModels
 
         public HomeViewModel()
         {
-            // khởi tạo dữ liệu
-            // Danh sách loại sản phẩm
-            CartProducts = new AsyncObservableCollection<dynamic>();
-            _spendMaterial = new AsyncObservableCollection<dynamic>();
-            Categories = new AsyncObservableCollection<dynamic>();
-            foreach (var item in DataProvider.Ins.DB.LoaiSanPham)
-            {
-                Categories.Add(new
-                {
-                    Ma = item.Ma,
-                    Ten = item.Ten
-                });
-            }
-            SelectedCategory = Categories.ElementAt(0);
-
-            TongTien = 0;
-
             // Command
+            Loaded = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+
+                // khởi tạo dữ liệu
+                // Danh sách loại sản phẩm
+                CartProducts = new AsyncObservableCollection<dynamic>();
+                _spendMaterial = new AsyncObservableCollection<dynamic>();
+                Categories = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.LoaiSanPham)
+                {
+                    Categories.Add(new
+                    {
+                        Ma = item.Ma,
+                        Ten = item.Ten
+                    });
+                }
+                SelectedCategory = Categories.ElementAt(0);
+
+                TongTien = 0;
+
+            });
+
 
             ChangeCategoryCommand = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
                 SelectedCategory = param;
@@ -496,5 +502,6 @@ namespace CoffeeShop.ViewModels
             }
             return result;
         }
+
     }
 }

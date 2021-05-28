@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Configuration;
+using CoffeeShop.Model;
 
 namespace CoffeeShop.ViewModels
 {
@@ -18,6 +19,32 @@ namespace CoffeeShop.ViewModels
         private String _settingColor = Brushes.White.ToString();
         private String _aboutColor = Brushes.White.ToString();
         private String _versionTextBlock = Brushes.White.ToString();
+        private string _nextPageVM;
+
+        // mesage
+        private string _message;
+        private bool _isOpenMessageDialog;
+
+        // enter password
+        private bool _isOpenEnterPasswordDialog;
+        private string _password;
+        #endregion
+
+        #region properties
+
+        // message
+        public string Message { get => _message; set { _message = value; OnPropertyChanged(); } }
+        public bool IsOpenMessageDialog { get => _isOpenMessageDialog; set { _isOpenMessageDialog = value; OnPropertyChanged(); } }
+
+        // enter password
+        public bool IsOpenEnterPasswordDialog { get => _isOpenEnterPasswordDialog; set { _isOpenEnterPasswordDialog = value;
+                if (value == true)
+                {
+                    Password = null;
+                }
+                OnPropertyChanged(); } }
+        public string Password { get => _password; set { _password = value;  OnPropertyChanged(); } }
+
         #endregion
 
         #region Commands
@@ -27,6 +54,10 @@ namespace CoffeeShop.ViewModels
         public ICommand ProductCommand { get; set; }
         public ICommand ReceiptCommand { get; set; }
         public ICommand SettingCommand { get; set; }
+
+        public ICommand CloseMessageDialog { get; set; }
+        public ICommand CloseEnterPasswordDialog { get; set; }
+
         #endregion
 
         #region Panel
@@ -72,38 +103,76 @@ namespace CoffeeShop.ViewModels
 
             WarehouseCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
-                ResetPanelColor();
-                global.WarehouseColor = Brushes.SaddleBrown.ToString();
-                global.WarehouseTextColor = Brushes.White.ToString();
-                global.CurrentPageViewModel = WarehouseViewModel.GetInstance();
-
+                _nextPageVM = "WarehouseVM";
+                IsOpenEnterPasswordDialog = true;
             });
 
             ProductCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
-                ResetPanelColor();
-                global.ProductColor = Brushes.SaddleBrown.ToString();
-                global.ProductTextColor = Brushes.White.ToString();
-                global.CurrentPageViewModel = ProductViewModel.GetInstance();
-
+                _nextPageVM = "ProductVM";
+                IsOpenEnterPasswordDialog = true;
             });
 
             ReceiptCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
-                ResetPanelColor();
-                global.ReceiptColor = Brushes.SaddleBrown.ToString();
-                global.ReceiptTextColor = Brushes.White.ToString();
-                global.CurrentPageViewModel = ReceiptViewModel.GetInstance();
-
+                _nextPageVM = "ReceiptVM";
+                IsOpenEnterPasswordDialog = true;
             });
 
             SettingCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
-                ResetPanelColor();
-                global.SettingColor = Brushes.SaddleBrown.ToString();
-                global.SettingTextColor = Brushes.White.ToString();
-                global.CurrentPageViewModel = SettingViewModel.GetInstance();
+                _nextPageVM = "SettingVM";
+                IsOpenEnterPasswordDialog = true;
+            });
 
+            CloseMessageDialog = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+                IsOpenMessageDialog = false;
+            });
+
+            CloseEnterPasswordDialog = new RelayCommand<object>((param) => { return true; }, (param) => {
+                if (bool.Parse(param.ToString()) == true)
+                {
+                    if (Password == DataProvider.Ins.DB.ThongSo.First(x=>x.Ten == "MaBaoMat").GiaTri)
+                    {
+                        IsOpenEnterPasswordDialog = false;
+                        switch (_nextPageVM)
+                        {
+                            case "WarehouseVM":
+                                ResetPanelColor();
+                                global.WarehouseColor = Brushes.SaddleBrown.ToString();
+                                global.WarehouseTextColor = Brushes.White.ToString();
+                                global.CurrentPageViewModel = WarehouseViewModel.GetInstance();
+                                break;
+                            case "ProductVM":
+                                ResetPanelColor();
+                                global.ProductColor = Brushes.SaddleBrown.ToString();
+                                global.ProductTextColor = Brushes.White.ToString();
+                                global.CurrentPageViewModel = ProductViewModel.GetInstance();
+                                break;
+                            case "ReceiptVM":
+                                ResetPanelColor();
+                                global.ReceiptColor = Brushes.SaddleBrown.ToString();
+                                global.ReceiptTextColor = Brushes.White.ToString();
+                                global.CurrentPageViewModel = ReceiptViewModel.GetInstance();
+                                break;
+                            case "SettingVM":
+                                ResetPanelColor();
+                                global.SettingColor = Brushes.SaddleBrown.ToString();
+                                global.SettingTextColor = Brushes.White.ToString();
+                                global.CurrentPageViewModel = SettingViewModel.GetInstance();
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Message = "Mật khẩu sai";
+                        IsOpenMessageDialog = true;
+                    }
+                }
+                else
+                {
+                    IsOpenEnterPasswordDialog = false;
+                }
             });
         }
 

@@ -112,6 +112,7 @@ namespace CoffeeShop.ViewModels
         #endregion
 
         #region Commands
+        public ICommand Loaded { get; set; }
         public ICommand CloseShowReceiptCommand { get; set; }
         public ICommand CloseMessageDialog { get; set; }
 
@@ -135,21 +136,26 @@ namespace CoffeeShop.ViewModels
 
         public ReceiptViewModel()
         {
-            // Setup dữ liệu
-            Receipts = new AsyncObservableCollection<dynamic>();
-            foreach (var item in DataProvider.Ins.DB.HoaDon)
-            {
-                Receipts.Add(new
-                {
-                    Ma = item.Ma,
-                    NgayTao = item.NgayTao,
-                    SDT = (item.KhachHang == null) ? "<empty>" : item.KhachHang.SDT,
-                    Diem = (item.DiemTichLuy == null) ? 0 : item.DiemTichLuy,
-                    TongTien = item.TongTien,
-                });
-            }
 
             //Command
+            Loaded = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
+
+                // Setup dữ liệu
+                Receipts = new AsyncObservableCollection<dynamic>();
+                foreach (var item in DataProvider.Ins.DB.HoaDon)
+                {
+                    Receipts.Add(new
+                    {
+                        Ma = item.Ma,
+                        NgayTao = item.NgayTao,
+                        SDT = (item.KhachHang == null) ? "<empty>" : item.KhachHang.SDT,
+                        Diem = (item.DiemTichLuy == null) ? 0 : item.DiemTichLuy,
+                        TongTien = item.TongTien,
+                    });
+                }
+            });
+
+
             CloseShowReceiptCommand = new RelayCommand<dynamic>((param) => { return true; }, (param) => {
                 IsOpenShowReceiptDialog = false;
                 SelectedReceipt = null;
