@@ -85,6 +85,16 @@ namespace CoffeeShop.ViewModels
 
         public MainViewModel()
         {
+            if (DateTime.Now.Year - int.Parse(DataProvider.Ins.DB.ThongSo.First(x => x.Ten == "LanCuoiResetChiTieu").GiaTri) >= int.Parse(DataProvider.Ins.DB.ThongSo.First(x => x.Ten == "KyHanResetChiTieu").GiaTri))
+            {
+                foreach (var item in DataProvider.Ins.DB.KhachHang)
+                {
+                    item.TongChiTieu = 0;
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+                DataProvider.Ins.DB.ThongSo.First(x => x.Ten == "LanCuoiResetChiTieu").GiaTri = DateTime.Now.Year.ToString();
+                DataProvider.Ins.DB.SaveChanges();
+            };
             ResetPanelColor();
             global.HomeColor = Brushes.SaddleBrown.ToString();
             global.HomeTextColor = Brushes.White.ToString();
