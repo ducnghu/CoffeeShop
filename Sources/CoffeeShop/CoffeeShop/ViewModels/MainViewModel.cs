@@ -53,6 +53,7 @@ namespace CoffeeShop.ViewModels
         public ICommand WarehouseCommand { get; set; }
         public ICommand ProductCommand { get; set; }
         public ICommand ReceiptCommand { get; set; }
+        public ICommand StatisticCommand { get; set; }
         public ICommand SettingCommand { get; set; }
 
         public ICommand CloseMessageDialog { get; set; }
@@ -119,6 +120,12 @@ namespace CoffeeShop.ViewModels
                 IsOpenEnterPasswordDialog = true;
             });
 
+            StatisticCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
+            {
+                _nextPageVM = "StatisticVM";
+                IsOpenEnterPasswordDialog = true;
+            });
+
             SettingCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
                 _nextPageVM = "SettingVM";
@@ -155,6 +162,12 @@ namespace CoffeeShop.ViewModels
                                 global.ReceiptTextColor = Brushes.White.ToString();
                                 global.CurrentPageViewModel = ReceiptViewModel.GetInstance();
                                 break;
+                            case "StatisticVM":
+                                ResetPanelColor();
+                                global.StatisticColor = Brushes.SaddleBrown.ToString();
+                                global.StatisticTextColor = Brushes.White.ToString();
+                                global.CurrentPageViewModel = StatisticViewModel.GetInstance();
+                                break;
                             case "SettingVM":
                                 ResetPanelColor();
                                 global.SettingColor = Brushes.SaddleBrown.ToString();
@@ -187,11 +200,15 @@ namespace CoffeeShop.ViewModels
             global.ProductColor = Brushes.White.ToString();
             global.ProductTextColor = Brushes.Gray.ToString();
 
+            global.ReceiptColor = Brushes.White.ToString();
+            global.ReceiptTextColor = Brushes.Gray.ToString();
+
+            global.StatisticColor = Brushes.White.ToString();
+            global.StatisticTextColor = Brushes.Gray.ToString();
+
             global.SettingColor = Brushes.White.ToString();
             global.SettingTextColor = Brushes.Gray.ToString();
 
-            global.ReceiptColor = Brushes.White.ToString();
-            global.ReceiptTextColor = Brushes.Gray.ToString();
         }
     }
 }

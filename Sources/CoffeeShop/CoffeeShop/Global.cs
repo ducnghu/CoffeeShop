@@ -63,6 +63,9 @@ namespace CoffeeShop
         private String _receiptColor;
         private String _receiptTextColor;
 
+        private String _statisticColor;
+        private String _statisticTextColor;
+
         private String _settingColor;
         private String _settingTextColor;
 
@@ -77,6 +80,9 @@ namespace CoffeeShop
 
         public String ReceiptColor { get => _receiptColor; set { _receiptColor = value; OnPropertyChanged("ReceiptColor"); } }
         public String ReceiptTextColor { get => _receiptTextColor; set { _receiptTextColor = value; OnPropertyChanged("ReceiptTextColor"); } }
+
+        public String StatisticColor { get => _statisticColor; set { _statisticColor = value; OnPropertyChanged("StatisticColor"); } }
+        public String StatisticTextColor { get => _statisticTextColor; set { _statisticTextColor = value; OnPropertyChanged("StatisticTextColor"); } }
 
         public String SettingColor { get => _settingColor; set { _settingColor = value; OnPropertyChanged("SettingColor"); } }
         public String SettingTextColor { get => _settingTextColor; set { _settingTextColor = value; OnPropertyChanged("SettingTextColor"); } }
