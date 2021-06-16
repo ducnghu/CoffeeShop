@@ -434,7 +434,7 @@ namespace CoffeeShop.ViewModels
             EditProductCommand = new RelayCommand<object>((param) => { return true; }, (param) => {
                 if (bool.Parse(param.ToString()) == true)
                 {
-                    if (EditProductName == null || EditProductName.Split(' ').Length == NewProductName.Length + 1)
+                    if (EditProductName == null || EditProductName.Split(' ').Length == EditProductName.Length + 1)
                     {
                         Message = "Vui lòng không để trống tên sản phẩm";
                         IsOpenMessageDialog = true;
@@ -566,8 +566,8 @@ namespace CoffeeShop.ViewModels
                     }
                     DataProvider.Ins.DB.SanPham.Remove(DataProvider.Ins.DB.SanPham.First(x => x.Ma == maDeleteProduct));
                     DataProvider.Ins.DB.SaveChanges();
+                    Products.Remove(SelectedProduct);
                 }
-                Products.Remove(SelectedProduct);
                 IsOpenDeleteProductDialog = false;
             });
 

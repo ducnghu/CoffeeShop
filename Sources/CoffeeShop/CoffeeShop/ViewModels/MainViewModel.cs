@@ -96,8 +96,8 @@ namespace CoffeeShop.ViewModels
                 DataProvider.Ins.DB.SaveChanges();
             };
             ResetPanelColor();
-            global.HomeColor = Brushes.SaddleBrown.ToString();
-            global.HomeTextColor = Brushes.White.ToString();
+            global.HomeColor = "#3e2723";
+            global.HomeTextColor = Brushes.SandyBrown.ToString();
 
             VersionTextBlock = GetPublishedVersion();
             if (VersionTextBlock == null || VersionTextBlock == "")
@@ -106,8 +106,7 @@ namespace CoffeeShop.ViewModels
             HomeCommand = new RelayCommand<object>((param) => { return true; }, (param) =>
             {
                 ResetPanelColor();
-                global.HomeColor = Brushes.SaddleBrown.ToString();
-                global.HomeTextColor = Brushes.White.ToString();
+                global.HomeColor = "#3e2723";
                 global.CurrentPageViewModel = HomeViewModel.GetInstance();
 
             });
@@ -156,32 +155,27 @@ namespace CoffeeShop.ViewModels
                         {
                             case "WarehouseVM":
                                 ResetPanelColor();
-                                global.WarehouseColor = Brushes.SaddleBrown.ToString();
-                                global.WarehouseTextColor = Brushes.White.ToString();
+                                global.WarehouseColor = "#3e2723";
                                 global.CurrentPageViewModel = WarehouseViewModel.GetInstance();
                                 break;
                             case "ProductVM":
                                 ResetPanelColor();
-                                global.ProductColor = Brushes.SaddleBrown.ToString();
-                                global.ProductTextColor = Brushes.White.ToString();
+                                global.ProductColor = "#3e2723";
                                 global.CurrentPageViewModel = ProductViewModel.GetInstance();
                                 break;
                             case "ReceiptVM":
                                 ResetPanelColor();
-                                global.ReceiptColor = Brushes.SaddleBrown.ToString();
-                                global.ReceiptTextColor = Brushes.White.ToString();
+                                global.ReceiptColor = "#3e2723";
                                 global.CurrentPageViewModel = ReceiptViewModel.GetInstance();
                                 break;
                             case "StatisticVM":
                                 ResetPanelColor();
-                                global.StatisticColor = Brushes.SaddleBrown.ToString();
-                                global.StatisticTextColor = Brushes.White.ToString();
+                                global.StatisticColor = "#3e2723";
                                 global.CurrentPageViewModel = StatisticViewModel.GetInstance();
                                 break;
                             case "SettingVM":
                                 ResetPanelColor();
-                                global.SettingColor = Brushes.SaddleBrown.ToString();
-                                global.SettingTextColor = Brushes.White.ToString();
+                                global.SettingColor = "#3e2723";
                                 global.CurrentPageViewModel = SettingViewModel.GetInstance();
                                 break;
                         }
@@ -201,23 +195,23 @@ namespace CoffeeShop.ViewModels
 
         void ResetPanelColor()
         {
-            global.HomeColor = Brushes.White.ToString();
-            global.HomeTextColor = Brushes.Gray.ToString();
+            global.HomeColor = Brushes.SaddleBrown.ToString();
+            global.HomeTextColor = Brushes.SandyBrown.ToString();
 
-            global.WarehouseColor = Brushes.White.ToString();
-            global.WarehouseTextColor = Brushes.Gray.ToString();
+            global.WarehouseColor = Brushes.SaddleBrown.ToString();
+            global.WarehouseTextColor = Brushes.SandyBrown.ToString();
 
-            global.ProductColor = Brushes.White.ToString();
-            global.ProductTextColor = Brushes.Gray.ToString();
+            global.ProductColor = Brushes.SaddleBrown.ToString();
+            global.ProductTextColor = Brushes.SandyBrown.ToString();
 
-            global.ReceiptColor = Brushes.White.ToString();
-            global.ReceiptTextColor = Brushes.Gray.ToString();
+            global.ReceiptColor = Brushes.SaddleBrown.ToString();
+            global.ReceiptTextColor = Brushes.SandyBrown.ToString();
 
-            global.StatisticColor = Brushes.White.ToString();
-            global.StatisticTextColor = Brushes.Gray.ToString();
+            global.StatisticColor = Brushes.SaddleBrown.ToString();
+            global.StatisticTextColor = Brushes.SandyBrown.ToString();
 
-            global.SettingColor = Brushes.White.ToString();
-            global.SettingTextColor = Brushes.Gray.ToString();
+            global.SettingColor = Brushes.SaddleBrown.ToString();
+            global.SettingTextColor = Brushes.SandyBrown.ToString();
 
         }
     }

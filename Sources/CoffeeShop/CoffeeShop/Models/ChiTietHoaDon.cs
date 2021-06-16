@@ -9,30 +9,16 @@
 
 namespace CoffeeShop.Models
 {
-    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietHoaDon : BaseViewModel
+    public partial class ChiTietHoaDon
     {
-
-        #region private variables
-        private int _ma;
-        private int _maHD;
-        private string _tenSP;
-        private int _soLuong;
-        private int _giaSP;
-
-        #endregion
-
-        #region properties
-        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
-        public int MaHD { get => _maHD; set { _maHD = value; OnPropertyChanged(); } }
-        public string TenSP { get => _tenSP; set { _tenSP = value; OnPropertyChanged(); } }
-        public int SoLuong { get => _soLuong; set { _soLuong = value; OnPropertyChanged(); } }
-        public int GiaSP { get => _giaSP; set { _giaSP = value; OnPropertyChanged(); } }
-
-        #endregion
+        public int Ma { get; set; }
+        public int MaHD { get; set; }
+        public string TenSP { get; set; }
+        public int SoLuong { get; set; }
+        public int GiaSP { get; set; }
     
         public virtual HoaDon HoaDon { get; set; }
     }

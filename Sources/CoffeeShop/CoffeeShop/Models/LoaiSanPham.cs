@@ -9,29 +9,19 @@
 
 namespace CoffeeShop.Models
 {
-    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class LoaiSanPham : BaseViewModel
+    public partial class LoaiSanPham
     {
         public LoaiSanPham()
         {
             this.SanPham = new HashSet<SanPham>();
         }
-
-        #region private variables
-        private int _ma;
-        private string _ten;
-
-        #endregion
-
-        #region properties
-        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
-        public string Ten { get => _ten; set { _ten = value; OnPropertyChanged(); } }
-
-        #endregion
-
+    
+        public int Ma { get; set; }
+        public string Ten { get; set; }
+    
         public virtual ICollection<SanPham> SanPham { get; set; }
     }
 }

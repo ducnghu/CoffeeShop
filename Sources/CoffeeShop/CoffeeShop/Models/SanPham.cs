@@ -9,35 +9,22 @@
 
 namespace CoffeeShop.Models
 {
-    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class SanPham : BaseViewModel
+    public partial class SanPham
     {
         public SanPham()
         {
             this.NguyenLieu = new HashSet<NguyenLieu>();
         }
-
-        #region private variables
-        private int _ma ;
-        private string _ten ;
-        private int _maLoai ;
-        private int _gia ;
-        private byte[] _anh ;
-
-        #endregion
-
-        #region properties
-        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
-        public string Ten { get => _ten; set { _ten = value; OnPropertyChanged(); } }
-        public int MaLoai { get => _maLoai; set { _maLoai = value; OnPropertyChanged(); } }
-        public int Gia { get => _gia; set { _gia = value; OnPropertyChanged(); } }
-        public byte[] Anh { get => _anh; set { _anh = value; OnPropertyChanged(); } }
-
-        #endregion
-
+    
+        public int Ma { get; set; }
+        public string Ten { get; set; }
+        public int MaLoai { get; set; }
+        public int Gia { get; set; }
+        public byte[] Anh { get; set; }
+    
         public virtual LoaiSanPham LoaiSanPham { get; set; }
         public virtual ICollection<NguyenLieu> NguyenLieu { get; set; }
     }

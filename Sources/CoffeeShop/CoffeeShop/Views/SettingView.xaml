@@ -15,7 +15,7 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
             
-            Background="White"
+            Background="#3e2723"
             DataContext="{StaticResource SVM}"
 
              mc:Ignorable="d" 
@@ -31,23 +31,25 @@
 
             <!--Nội dung dialog cảnh báo-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <TextBlock Margin="5 10"
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <TextBlock Margin="5 10"
                                   VerticalAlignment="Center"
-                                  FontSize="20" Text="{Binding Message}">
-                    </TextBlock>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                                  FontSize="20" Text="{Binding Message}" Foreground="#3e2723">
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseMessageDialog}"  CommandParameter="true">
-                            CLOSE
-                        </Button>
+                                CLOSE
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
@@ -61,46 +63,48 @@
 
             <!--Nội dung dialog thay đổi bảo mật-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <PasswordBox Margin="5 10"
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <PasswordBox Margin="5 10"
                                       materialDesign:HintAssist.Hint="MẬT KHẨU CŨ"
                                       Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                       VerticalAlignment="Center"
-                                      FontSize="20"
+                                      FontSize="20" Foreground="SaddleBrown"
                         models:PasswordBoxAssistant.BindPassword="true"  models:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordOld, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </PasswordBox>
-                    <PasswordBox Margin="5 10"
+                        </PasswordBox>
+                        <PasswordBox Margin="5 10"
                                       materialDesign:HintAssist.Hint="MẬT KHẨU MỚI"
                                       Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                       VerticalAlignment="Center"
-                                      FontSize="20"
+                                      FontSize="20" Foreground="SaddleBrown"
                         models:PasswordBoxAssistant.BindPassword="true"  models:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordNew, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </PasswordBox>
-                    <PasswordBox Margin="5 10"
+                        </PasswordBox>
+                        <PasswordBox Margin="5 10"
                                       materialDesign:HintAssist.Hint="NHẬP LẠI MẬT KHẨU MỚI"
                                       Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                       VerticalAlignment="Center"
-                                      FontSize="20"
+                                      FontSize="20" Foreground="SaddleBrown"
                         models:PasswordBoxAssistant.BindPassword="true"  models:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordNew2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </PasswordBox>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                        </PasswordBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseChangePasswordDialog}"  CommandParameter="true">
-                            ENTER
-                        </Button>
-                        <Button
+                                ENTER
+                            </Button>
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseChangePasswordDialog}"  CommandParameter="false">
-                            CLOSE
-                        </Button>
+                                CLOSE
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
@@ -111,12 +115,12 @@
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0">
-                <TextBlock DockPanel.Dock="Left" FontSize="40" FontWeight="DemiBold" Margin="10">
+                <TextBlock DockPanel.Dock="Left" FontSize="40" FontWeight="DemiBold" Margin="10" Foreground="SandyBrown">
                     Setting
                 </TextBlock>
 
                 <!--Nút thay đổi mật khẩu-->
-                <Button DockPanel.Dock="Right" Width="170" Height="55" Background="SaddleBrown" BorderThickness="1" BorderBrush="SaddleBrown"  ToolTip="Add New Product" HorizontalAlignment="Right"
+                <Button DockPanel.Dock="Right" Width="170" Height="55" Background="SandyBrown" BorderThickness="1" BorderBrush="SandyBrown"  ToolTip="Add New Product" HorizontalAlignment="Right" Foreground="SaddleBrown"
                         Command="{Binding ClickChangePasswordButtonCommand}" VerticalAlignment="Top" Margin="10" Content="Change password" FontSize="15">
                 </Button>
             </DockPanel>
@@ -139,7 +143,7 @@
                 <TextBox Margin="5" Grid.Column="0" Grid.Row="0"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" Foreground="SandyBrown">
                     <TextBox.Text>
                         Loại khách hàng
                     </TextBox.Text>
@@ -148,7 +152,7 @@
                 <TextBox Margin="5" Grid.Column="1" Grid.Row="0"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" TextWrapping="Wrap">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" TextWrapping="Wrap" Foreground="SandyBrown">
                     <TextBox.Text>
                         Tỉ lệ đổi điểm (điểm/10.000đ)
                     </TextBox.Text>
@@ -157,7 +161,7 @@
                 <TextBox Margin="5" Grid.Column="2" Grid.Row="0"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" Foreground="SandyBrown">
                     <TextBox.Text>
                         Hạn mức chi tiêu
                     </TextBox.Text>
@@ -166,7 +170,7 @@
                 <TextBox Margin="5" Grid.Column="0" Grid.Row="1"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" Foreground="SandyBrown">
                     <TextBox.Text>
                         Khách hàng thường
                     </TextBox.Text>
@@ -175,7 +179,7 @@
                 <TextBox Margin="5" Grid.Column="0" Grid.Row="2"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" Foreground="SandyBrown">
                     <TextBox.Text>
                         Khách hàng thường xuyên
                     </TextBox.Text>
@@ -184,7 +188,7 @@
                 <TextBox Margin="5" Grid.Column="0" Grid.Row="3"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" Foreground="SandyBrown">
                     <TextBox.Text>
                         Khách hàng thân thiết
                     </TextBox.Text>
@@ -193,7 +197,7 @@
                 <TextBox Margin="5" Grid.Column="0" Grid.Row="4"
                                       Style="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}"
                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                      FontSize="30" IsReadOnly="True" FontWeight="Bold">
+                                      FontSize="30" IsReadOnly="True" FontWeight="Bold" Foreground="SandyBrown">
                     <TextBox.Text>
                         Kỳ hạn reset tổng chi tiêu
                     </TextBox.Text>
@@ -202,7 +206,7 @@
                 <TextBox Margin="5"  Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="TLDDKHT" Mode="TwoWay">
                         </Binding>
@@ -212,7 +216,7 @@
                 <TextBox Margin="5"  Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="HMCTKHT" Mode="TwoWay">
                         </Binding>
@@ -222,7 +226,7 @@
                 <TextBox Margin="5"  Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="TLDDKHTX" Mode="TwoWay">
                         </Binding>
@@ -232,7 +236,7 @@
                 <TextBox Margin="5"  Grid.Column="2"  Grid.Row="2" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="HMCTKHTX" Mode="TwoWay">
                         </Binding>
@@ -242,7 +246,7 @@
                 <TextBox Margin="5"  Grid.Column="1"  Grid.Row="3" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="TLDDKHTT" Mode="TwoWay">
                         </Binding>
@@ -252,7 +256,7 @@
                 <TextBox Margin="5"  Grid.Column="2"  Grid.Row="3" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="HMCTKHTT" Mode="TwoWay">
                         </Binding>
@@ -262,7 +266,7 @@
                 <TextBox Margin="5"  Grid.Column="1"  Grid.Row="4" HorizontalAlignment="Center"
                                       Style="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                       VerticalAlignment="Center"
-                                      FontSize="30" IsReadOnly="False">
+                                      FontSize="30" IsReadOnly="False" Foreground="SandyBrown">
                     <TextBox.Text>
                         <Binding Path="YearsReset" Mode="TwoWay">
                         </Binding>

@@ -67,23 +67,25 @@
 
             <!--Nội dung dialog cảnh báo-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <TextBlock Margin="5 10"
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <TextBlock Margin="5 10"
                                   VerticalAlignment="Center"
-                                  FontSize="20" Text="{Binding Message}">
-                    </TextBlock>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                                  FontSize="20" Text="{Binding Message}" Foreground="SaddleBrown">
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseMessageDialog}"  CommandParameter="true">
-                            CLOSE
-                        </Button>
+                                CLOSE
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
@@ -94,40 +96,42 @@
                                        Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualWidth}"
                                         Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}">
 
-            <!--Nội dung dialog cảnh báo-->
+            <!--Nội dung dialog Nhập mã bảo mật-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <PasswordBox Margin="5 10"
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <PasswordBox Margin="5 10"
                                       materialDesign:HintAssist.Hint="MẬT KHẨU"
                                       Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                       VerticalAlignment="Center"
-                                      FontSize="20"
+                                      FontSize="20" Foreground="SaddleBrown"
                         x:Name="PasswordBox"
                         models:PasswordBoxAssistant.BindPassword="true"  models:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </PasswordBox>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                        </PasswordBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseEnterPasswordDialog}"  CommandParameter="true">
-                            ENTER
-                        </Button>
-                        <Button
+                                ENTER
+                            </Button>
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseEnterPasswordDialog}"  CommandParameter="false">
-                            CLOSE
-                        </Button>
+                                CLOSE
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
         
         <DockPanel>
-            <DockPanel DockPanel.Dock="Left">
+            <DockPanel DockPanel.Dock="Left" Background="SandyBrown">
                 <StackPanel Height="auto" Width="130" Margin="5" Orientation="Vertical">
                     <!--Home button-->
                     <Button Margin="10 30 10 10" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}"  Width="110" Height="90" Command="{Binding HomeCommand}">
@@ -190,7 +194,7 @@
                     </Button>
 
                 </StackPanel>
-                <ContentControl Grid.Column="1" DockPanel.Dock="Right" Margin="10 0" Content="{Binding Source={StaticResource Global},Path=CurrentPageViewModel}">
+                <ContentControl Grid.Column="1" DockPanel.Dock="Right" Margin="0" Content="{Binding Source={StaticResource Global},Path=CurrentPageViewModel}">
 
                 </ContentControl>
             </DockPanel>

@@ -9,35 +9,22 @@
 
 namespace CoffeeShop.Models
 {
-    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class KhachHang : BaseViewModel
+    public partial class KhachHang
     {
         public KhachHang()
         {
             this.HoaDon = new HashSet<HoaDon>();
         }
     
-        #region private variables
-        private int _ma;
-        private string _ten;
-        private string _sdt;
-        private int _diemTichLuy;
-        private int _tongChiTieu;
-
-        #endregion
-
-        #region properties
-        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
-        public string Ten { get => _ten; set { _ten = value; OnPropertyChanged(); } }
-        public string SDT { get => _sdt; set { _sdt = value; OnPropertyChanged(); } }
-        public int DiemTichLuy { get => _diemTichLuy; set { _diemTichLuy = value; OnPropertyChanged(); } }
-        public int TongChiTieu { get => _tongChiTieu; set { _tongChiTieu = value; OnPropertyChanged(); } }
-
-        #endregion
-
+        public int Ma { get; set; }
+        public string Ten { get; set; }
+        public string SDT { get; set; }
+        public int DiemTichLuy { get; set; }
+        public int TongChiTieu { get; set; }
+    
         public virtual ICollection<HoaDon> HoaDon { get; set; }
     }
 }

@@ -9,27 +9,15 @@
 
 namespace CoffeeShop.Models
 {
-    using CoffeeShop.ViewModels;
     using System;
     using System.Collections.Generic;
     
-    public partial class ThongSo : BaseViewModel
+    public partial class ThongSo
     {
-        #region private variables
-        private int _ma;
-        private string _ten;
-        private string _kieu;
-        private string _giaTri;
-        private bool _tinhTrang;
-
-        #endregion
-
-        #region properties
-        public int Ma { get => _ma; set { _ma = value; OnPropertyChanged(); } }
-        public string Ten { get => _ten; set { _ten = value; OnPropertyChanged(); } }
-        public string Kieu { get => _kieu; set { _kieu = value; OnPropertyChanged(); } }
-        public string GiaTri { get => _giaTri; set { _giaTri = value; OnPropertyChanged(); } }
-        public bool TinhTrang { get => _tinhTrang; set { _tinhTrang = value; OnPropertyChanged(); } }
-        #endregion
+        public int Ma { get; set; }
+        public string Ten { get; set; }
+        public string Kieu { get; set; }
+        public string GiaTri { get; set; }
+        public bool TinhTrang { get; set; }
     }
 }

@@ -15,7 +15,7 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
             
-            Background="White"
+            Background="#3e2723"
             DataContext="{StaticResource WVM}"
 
              mc:Ignorable="d" 
@@ -38,23 +38,25 @@
 
             <!--Nội dung dialog cảnh báo-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <TextBlock Margin="5 10"
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <TextBlock Margin="5 10"
                                   VerticalAlignment="Center"
-                                  FontSize="20" Text="{Binding Message}">
-                    </TextBlock>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                                  FontSize="20" Text="{Binding Message}" Foreground="#3e2723">
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding CloseMessageDialog}"  CommandParameter="true">
-                            CLOSE
-                        </Button>
+                                CLOSE
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
@@ -257,40 +259,47 @@
                 <RowDefinition Height="770"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0">
-                <TextBlock DockPanel.Dock="Left" FontSize="40" FontWeight="DemiBold" Margin="10" Width="300">
+                <TextBlock DockPanel.Dock="Left" FontSize="40" FontWeight="DemiBold" Margin="10" Width="300" Foreground="SandyBrown">
                     Kho nguyên liệu
                 </TextBlock>
 
                 <!--Search Bar-->
-                <Border BorderThickness="1" BorderBrush="SaddleBrown" CornerRadius="10" Margin="100 10">
+                <Border BorderThickness="1" BorderBrush="SandyBrown" CornerRadius="10" Margin="100 10">
                     <StackPanel  Orientation="Horizontal" Margin="10">
-                        <materialDesign:PackIcon Foreground="Gray" VerticalAlignment="Center" Kind="Magnify" Width="30" Height="30" />
+                        <materialDesign:PackIcon Foreground="SandyBrown" VerticalAlignment="Center" Kind="Magnify" Width="30" Height="30" />
                         <TextBox DockPanel.Dock="Right"
                             VerticalAlignment="Center"
                             Width="250"
                             Height="30"
                             AcceptsReturn="True"
                             materialDesign:HintAssist.Hint="Search for raw materials"
-                            Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}"/>
+                            materialDesign:HintAssist.Foreground="SandyBrown"
+                            Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}" Foreground="SandyBrown"/>
                     </StackPanel>
                 </Border>
 
                 <!--Nút thêm nguyên liệu-->
-                <Button DockPanel.Dock="Right" Width="170" Height="55" Background="White" BorderThickness="1" BorderBrush="SaddleBrown"  ToolTip="Add New Raw Material" HorizontalAlignment="Right"
+                <Button DockPanel.Dock="Right" Width="170" Height="55" Background="SandyBrown" BorderThickness="1" BorderBrush="SandyBrown"  ToolTip="Add New Raw Material" HorizontalAlignment="Right"
                         Command="{Binding ClickAddRawMaterialButtonCommand}" VerticalAlignment="Top" Margin="10">
-                    <materialDesign:PackIcon Foreground="SaddleBrown"  Width="50" Height="40" Kind="Plus"/>
+                    <materialDesign:PackIcon Foreground="#3e2723"  Width="50" Height="40" Kind="Plus"/>
                 </Button>
             </DockPanel>
             <!--Nguyên liệu ListView-->
             <ListView x:Name="RawMaterialsListView" Grid.Row="1"
             ItemsSource="{Binding RawMaterials}" SelectedItem="{Binding SelectedRawMaterial}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="false"/>
+                        <Setter Property="IsSelected" Value="false"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn
                         Header="Tên nguyên liệu" Width="600">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SaddleBrown" Text="{Binding Ten}" ></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding Ten}" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -298,7 +307,7 @@
                         Header="Số lượng" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Medium" Margin="10 5" Text="{Binding SoLuong}"></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding SoLuong}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -306,7 +315,7 @@
                         Header="Đơn vị" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Medium" Margin="10 5" Text="{Binding DonVi}"></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding DonVi}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
