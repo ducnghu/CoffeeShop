@@ -69,64 +69,66 @@
 
             <!--Nội dung dialog thêm nguyên liệu-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <TextBlock>
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <TextBlock>
                                THÊM NGUYÊN LIỆU MỚI VÀO KHO
-                    </TextBlock>
-                    <Grid Width="400" Height="300">
-                        <StackPanel Orientation="Vertical" Margin="30 10">
-                            <TextBox Margin="5 10"
+                        </TextBlock>
+                        <Grid Width="400" Height="300">
+                            <StackPanel Orientation="Vertical" Margin="30 10">
+                                <TextBox Margin="5 10"
                                   materialDesign:HintAssist.Hint="TÊN NGUYÊN LIỆU"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                <TextBox.Text>
-                                    <Binding Path="NewRawMaterialName">
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
+                                    <TextBox.Text>
+                                        <Binding Path="NewRawMaterialName">
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
 
-                            <TextBox Margin="5 10"
+                                <TextBox Margin="5 10"
                                   materialDesign:HintAssist.Hint="SỐ LƯỢNG NHẬP VÀO"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                <TextBox.Text>
-                                    <Binding Path="NewRawMaterialAmount">
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <TextBox Margin="5 10"
+                                    <TextBox.Text>
+                                        <Binding Path="NewRawMaterialAmount">
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBox Margin="5 10"
                                   materialDesign:HintAssist.Hint="ĐƠN VỊ"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                <TextBox.Text>
-                                    <Binding Path="NewRawMaterialUnit">
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </StackPanel>
-                    </Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                                    <TextBox.Text>
+                                        <Binding Path="NewRawMaterialUnit">
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding AddRawMaterialCommand}"  
                                   CommandParameter="true">
-                            ACCEPT
-                        </Button>
-                        <Button
+                                ACCEPT
+                            </Button>
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding AddRawMaterialCommand}"  CommandParameter="false">
-                            CANCEL
-                        </Button>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
@@ -139,76 +141,78 @@
 
             <!--Nội dung dialog thay đổi số lượng-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <TextBlock>
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <TextBlock>
                                THAY ĐỔI SỐ LƯỢNG
-                    </TextBlock>
-                    <Grid Width="400" Height="150">
-                        <StackPanel Orientation="Vertical" Margin="30 10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                        </TextBlock>
+                        <Grid Width="400" Height="150">
+                            <StackPanel Orientation="Vertical" Margin="30 10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="5 10"
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="5 10"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                    <TextBlock.Text>
-                                        SỐ LƯỢNG HIỆN CÓ:
-                                    </TextBlock.Text>
-                                </TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="5 10"
+                                        <TextBlock.Text>
+                                            SỐ LƯỢNG HIỆN CÓ:
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="5 10"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                    <TextBlock.Text>
-                                        SỐ LƯỢNG THAY ĐỔI:
-                                    </TextBlock.Text>
-                                </TextBlock>
+                                        <TextBlock.Text>
+                                            SỐ LƯỢNG THAY ĐỔI:
+                                        </TextBlock.Text>
+                                    </TextBlock>
 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10"
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 10"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                    <TextBlock.Text>
-                                        <Binding Path="PresentRawMaterialAmount">
-                                        </Binding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                                <TextBox Grid.Row="1" Grid.Column="1" Margin="5 10"
+                                        <TextBlock.Text>
+                                            <Binding Path="PresentRawMaterialAmount">
+                                            </Binding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5 10"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                                    <TextBox.Text>
-                                        <Binding Path="ChangeRawMaterialAmount">
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                                        <TextBox.Text>
+                                            <Binding Path="ChangeRawMaterialAmount">
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding ChangeAmountRawMaterialCommand}"  
                                   CommandParameter="true">
-                            ACCEPT
-                        </Button>
-                        <Button
+                                ACCEPT
+                            </Button>
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding ChangeAmountRawMaterialCommand}"  CommandParameter="false">
-                            CANCEL
-                        </Button>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
@@ -221,35 +225,37 @@
 
             <!--Nội dung dialog thay đổi số lượng-->
             <materialDesign:DialogHost.DialogContent>
-
-                <StackPanel Margin="16">
-                    <TextBlock Margin="5 10"
+                <Border Background="SandyBrown">
+                    <StackPanel Margin="16">
+                        <TextBlock Margin="5 10"
                                   VerticalAlignment="Center"
                                   FontSize="20">
-                        <TextBlock.Text>
-                            Dữ liệu sẽ bị mất hoàn toàn và không thể khôi phục
+                            <TextBlock.Text>
+                                Dữ liệu sẽ bị mất hoàn toàn và không thể khôi phục
                             Xác nhận xóa ?
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsDefault="False"
                                   Margin="0 8 8 0"
                                   Command="{Binding DeleteRawMaterialCommand}"  
                                   CommandParameter="true">
-                            ACCEPT
-                        </Button>
-                        <Button
+                                ACCEPT
+                            </Button>
+                            <Button
                                   Style="{StaticResource MaterialDesignFlatButton}"
                                   IsCancel="True"
                                   IsDefault="True"
                                   Margin="0 8 8 0"
                                   Command="{Binding DeleteRawMaterialCommand}"  CommandParameter="false">
-                            CANCEL
-                        </Button>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
