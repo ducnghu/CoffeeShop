@@ -227,7 +227,7 @@ namespace CoffeeShop.ViewModels
                 else
                 {
                     IsOpenChangeAmountRawMaterialDialog = false;
-
+                    SelectedRawMaterial = null;
                 }
             });
 
@@ -250,6 +250,10 @@ namespace CoffeeShop.ViewModels
                     DataProvider.Ins.DB.KhoNguyenLieu.Remove(deletekhonguyenlieu);
                     DataProvider.Ins.DB.SaveChanges();
                     RawMaterials.Remove(SelectedRawMaterial);
+                }
+                else
+                {
+                    SelectedRawMaterial = null;
                 }
                 IsOpenDeleteRawMaterialDialog = false;
             });
