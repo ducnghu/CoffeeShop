@@ -27,7 +27,6 @@
         <models:NumberToVNDConverter x:Key="MoneyConverter"/>
     </UserControl.Resources>
     <Grid>
-
         <!--Cảnh báo-->
         <materialDesign:DialogHost IsOpen="{Binding IsOpenMessageDialog}"
                     Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
@@ -147,8 +146,7 @@
                             </TextBox>
 
                             <!--Cart ListView-->
-                            <ListView Height="auto" MaxHeight="300" Grid.Row="3" Grid.ColumnSpan="2"
-            ItemsSource="{Binding CartProducts}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
+                            <ListView Height="auto" MaxHeight="300" Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding CartProducts}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="Focusable" Value="false"/>
@@ -157,40 +155,35 @@
                                 </ListView.ItemContainerStyle>
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn
-                        Header="Tên sản phẩm" Width="150">
+                                        <GridViewColumn Header="Tên sản phẩm" Width="150">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="10 5"  Foreground="#3e2723" Text="{Binding Ten}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn
-                        Header="Giá" Width="100">
+                                        <GridViewColumn Header="Giá" Width="100">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="10 5" Foreground="#3e2723" Text="{Binding Gia, Converter={StaticResource MoneyConverter}}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn
-                         Width="50">
+                                        <GridViewColumn Width="50">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="3 5" Foreground="#3e2723" Text="X"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn
-                        Header="Số lượng" Width="50">
+                                        <GridViewColumn Header="Số lượng" Width="50">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="3 5" Foreground="#3e2723" Text="{Binding SoLuong}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn
-                        Header="Tổng giá" Width="150">
+                                        <GridViewColumn Header="Tổng giá" Width="150">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="5 5" Foreground="#3e2723" Text="{Binding TongGia, Converter={StaticResource MoneyConverter}}"></TextBlock>
@@ -308,7 +301,7 @@
                             <Button Background="{x:Null}" BorderBrush="{x:Null}"  Width="120" Height="50" Padding="0"
                                  Command="{Binding ElementName=Categories, Path=DataContext.ChangeCategoryCommand}" CommandParameter="{Binding}">
                                 <Border Background="SaddleBrown" Width="120" Height="50" CornerRadius="15" Margin="0">
-                                    <TextBlock Foreground="SandyBrown"  VerticalAlignment="Center" Text="{Binding Ten}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="15" FontWeight="Medium"></TextBlock>
+                                    <TextBlock Foreground="SandyBrown"  VerticalAlignment="Center" Text="{Binding Ten}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="15" FontWeight="Medium" TextAlignment="Center"></TextBlock>
                                 </Border>
                             </Button>
                         </DataTemplate>
@@ -393,27 +386,26 @@
                             <Setter Property="Focusable" Value="false"/>
                             <Setter Property="IsSelected" Value="false"/>
                         </Style>
+
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn
-                        Header="Tên sản phẩm" Width="150">
+
+                            <GridViewColumn Header="Tên sản phẩm" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="10 5" Text="{Binding Ten}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn
-                        Header="Giá" Width="100">
+                            <GridViewColumn Header="Giá" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="10 5" Text="{Binding Gia, Converter={StaticResource MoneyConverter}}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn
-                         Width="45">
+                            <GridViewColumn Width="45">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Height="auto" Margin="2 5" BorderBrush="SaddleBrown" Background="Gray" BorderThickness="1" Padding="0" HorizontalAlignment="Right"
@@ -423,16 +415,14 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn
-                        Header="Số lượng" Width="50">
+                            <GridViewColumn Header="Số lượng" Width="50">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="3 5" Text="{Binding SoLuong}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn
-                         Width="45">
+                            <GridViewColumn Width="45">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Height="auto" Margin="2 5" BorderBrush="SaddleBrown" Background="SandyBrown" BorderThickness="1" Padding="0" HorizontalAlignment="Right"
@@ -442,8 +432,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn
-                        Header="Tổng giá" Width="200">
+                            <GridViewColumn Header="Tổng giá" Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Medium" Margin="5 5" Text="{Binding TongGia, Converter={StaticResource MoneyConverter}}"></TextBlock>
@@ -457,10 +446,9 @@
                 <!--Check out-->
                 <Button Margin="30 20 0 20" BorderBrush="#3e2723" Background="#3e2723" BorderThickness="1" Padding="0" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Width="200" Height="80"
                     Command="{Binding ClickCheckoutButtonCommand}" CommandParameter="{Binding}" Content="{Binding TongTien,Converter={StaticResource MoneyConverter}}" FontSize="30" Foreground="SandyBrown">
-                    
+
                 </Button>
             </DockPanel>
         </Grid>
-
     </Grid>
 </UserControl>
