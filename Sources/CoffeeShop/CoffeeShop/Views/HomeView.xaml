@@ -317,9 +317,9 @@
                 <ListView Name="Products" ItemsSource="{Binding Products}" HorizontalAlignment="Left"  Width="875" Height="640" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Button Background="{x:Null}" BorderBrush="{x:Null}"  Width="195" Height="220" Padding="0"
+                            <Button Background="{x:Null}" BorderBrush="{x:Null}"  Width="195" Height="240" Padding="0"
                                  Command="{Binding ElementName=Products, Path=DataContext.AddToCartCommand}" CommandParameter="{Binding}">
-                                <Border Background="SaddleBrown" CornerRadius="15" Margin="0" Width="195" Height="220">
+                                <Border Background="SaddleBrown" CornerRadius="15" Margin="0" Width="195" Height="240">
                                     <Grid Width="195">
                                         <Border VerticalAlignment="Top" Height="170" CornerRadius="10" Margin="10" BorderBrush="Gray" BorderThickness="1">
                                             <Border.Background>
