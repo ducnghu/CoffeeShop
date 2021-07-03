@@ -298,7 +298,7 @@
                             Width="250"
                             Height="30"
                             AcceptsReturn="True"
-                            materialDesign:HintAssist.Hint="Search for receipts"
+                            materialDesign:HintAssist.Hint="Nhập số điện thoại khách hàng"
                             Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}" Foreground="SandyBrown"/>
                     </StackPanel>
                 </Border>
@@ -309,40 +309,43 @@
             ItemsSource="{Binding Receipts}" SelectedItem="{Binding SelectedReceipt}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn
-                        Header="ID" Width="200">
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                                <Setter Property="FontSize" Value="20"></Setter>
+                                <Setter Property="Padding" Value="10 0 0 5"></Setter>
+                                <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                                <Setter Property="Foreground" Value="SaddleBrown"></Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="ID" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding Ma}" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                        Header="Ngày tạo" Width="300">
+                        <GridViewColumn Header="Ngày tạo" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding NgayTao, Converter={StaticResource DateConverter}}" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                        Header="Số điện thoại" Width="400">
+                        <GridViewColumn Header="Số điện thoại" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding SDT}" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                        Header="Điểm tích lũy" Width="200">
+                        <GridViewColumn Header="Điểm tích lũy" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding Diem}" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                        Header="Thanh Toán" Width="300">
+                        <GridViewColumn Header="Thanh Toán" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding TongTien, Converter={StaticResource MoneyConverter}}" ></TextBlock>

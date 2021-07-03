@@ -270,15 +270,16 @@
                 </TextBlock>
 
                 <!--Search Bar-->
-                <Border BorderThickness="1" BorderBrush="SandyBrown" CornerRadius="10" Margin="100 10">
+                <Border BorderThickness="2" BorderBrush="SandyBrown" CornerRadius="10" Margin="100 10">
                     <StackPanel  Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Foreground="SandyBrown" VerticalAlignment="Center" Kind="Magnify" Width="30" Height="30" />
                         <TextBox DockPanel.Dock="Right"
                             VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
                             Width="250"
                             Height="30"
                             AcceptsReturn="True"
-                            materialDesign:HintAssist.Hint="Search for raw materials"
+                            materialDesign:HintAssist.Hint="Nhập tên nguyên liệu"
                             materialDesign:HintAssist.Foreground="SandyBrown"
                             Text="{Binding Search,UpdateSourceTrigger=PropertyChanged}" Foreground="SandyBrown"/>
                     </StackPanel>
@@ -301,32 +302,36 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn
-                        Header="Tên nguyên liệu" Width="600">
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                                <Setter Property="FontSize" Value="20"></Setter>
+                                <Setter Property="Padding" Value="10 0 0 5"></Setter>
+                                <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                                <Setter Property="Foreground" Value="SaddleBrown"></Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="Tên nguyên liệu" Width="600">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding Ten}" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                        Header="Số lượng" Width="300">
+                        <GridViewColumn Header="Số lượng" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding SoLuong}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                        Header="Đơn vị" Width="200">
+                        <GridViewColumn Header="Đơn vị" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Medium" Margin="10 5" Foreground="SandyBrown" Text="{Binding DonVi}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                         Width="150">
+                        <GridViewColumn Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Height="auto" Margin="10 5" BorderBrush="SaddleBrown" Background="Gray" BorderThickness="1" Padding="0" HorizontalAlignment="Right"
@@ -336,8 +341,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn
-                         Width="100">
+                        <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Height="auto" Margin="10 5" BorderBrush="Red" Background="Transparent" BorderThickness="1" Padding="0" HorizontalAlignment="Right"
