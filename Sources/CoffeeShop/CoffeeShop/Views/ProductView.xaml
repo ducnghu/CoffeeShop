@@ -163,32 +163,28 @@
             ItemsSource="{Binding NewProductRawMaterials}" SelectedItem="{Binding SelectedNewProductRawMaterial}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn
-                        Header="Tên nguyên liệu" Width="350">
+                                            <GridViewColumn Header="Tên nguyên liệu" Width="350">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="15" FontWeight="Medium" Margin="10 5" Foreground="#4e3427" Text="{Binding Ten}" ></TextBlock>
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn
-                        Header="Số lượng" Width="150">
+                                            <GridViewColumn Header="Số lượng" Width="150">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Medium" Margin="10 5" Foreground="#4e3427" Text="{Binding SoLuong}"></TextBlock>
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn
-                        Header="Đơn vị" Width="150">
+                                            <GridViewColumn Header="Đơn vị" Width="150">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Medium" Margin="10 5" Foreground="#4e3427" Text="{Binding DonVi}"></TextBlock>
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
-                                            <GridViewColumn
-                         Width="100">
+                                            <GridViewColumn Width="100">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button Height="auto" Margin="10 5" BorderBrush="Red" Background="Transparent" BorderThickness="1" Padding="0" HorizontalAlignment="Right"
