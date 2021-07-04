@@ -294,12 +294,6 @@
             <!--Nguyên liệu ListView-->
             <ListView x:Name="RawMaterialsListView" Grid.Row="1"
             ItemsSource="{Binding RawMaterials}" SelectedItem="{Binding SelectedRawMaterial}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Focusable" Value="false"/>
-                        <Setter Property="IsSelected" Value="false"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
                         <GridView.ColumnHeaderContainerStyle>
